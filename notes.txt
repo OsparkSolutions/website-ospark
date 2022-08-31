@@ -1,0 +1,20 @@
+- create folder that holds shared snippets of code
+- run in cmd 'npm init', call the package name 'toolkit', initial version '0.0.1',
+- link to this package from the new ospark website folder
+- from ospark website, run an npm install and give it file location of this new folder ('npm install ../toolkit')
+- then create subdirectory folder called 'react' inside of the toolkit directory
+- in this react folder create a 'ts' file called 'layoutHooks'
+
+
+
+
+- Create a react hook that is going to change when the window size changes
+- use 'debouncing' - creating a set of rules to prevent to many renders of the react page while resizing browser
+
+	1. Add event listener to the window for the resize event (only add it once in the components lifecycle)
+	2. When the event listener triggers, set a timeout of a 300ms to trigger a 'state update'
+	3. We want this hook to output an object that will have its current height and width of the window, and a size breakpoint
+		-This object should return : height, width, breakpoint(aka device size)
+
+	*useState, useEffect, useRef will need to be used
+
