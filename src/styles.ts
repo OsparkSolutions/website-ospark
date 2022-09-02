@@ -23,13 +23,13 @@ export const header = mergeStyles({
 });
 
 export const mainSection = mergeStyles({
-    paddingTop: '100px',
+    paddingTop: '300px',
     display: 'flex',
     alignContent: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
     'p':[{justifyContent: 'center', textAlign: 'center'}, [fieldwork]],
-    
+     
     
     
 })
