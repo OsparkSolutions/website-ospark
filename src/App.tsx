@@ -7,16 +7,33 @@ import { ContactUs } from './ContactUs';
 //import { useWindowSize } from 'toolkit/react/layoutHooks';
 import { useEffect, useRef, useState } from 'react';
 
+
 type DeviceSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
-const calcDeviceSize = () =>{
-  
+
+//takes the width and returns he device size as text
+const calcDeviceSize = (w: number) =>{
+    if (w < 600) {
+        return 'xSmall';
+    }
+    else if (w >= 600 && w < 768) {
+        return 'small';
+    }
+    else if (w >= 768 && w < 992) {
+        return 'medium';
+    }
+    else if (w >= 992 && w < 1200) {
+        return 'large';
+    }
+    else{
+        return 'xLarge';
+    }
 }
 
 export const useWindowSize = () => {
     const body = document.getElementsByTagName('body')[0];
     let [width, setWidth] = useState<number>(body.clientWidth);
     let [height, setHeight] = useState<number>(body.clientHeight);
-    let [deviceSize, setDeviceSize] = useState<DeviceSize>();
+    let [deviceSize, setDeviceSize] = useState<DeviceSize>(calcDeviceSize(body.clientWidth));
     const clockRef = useRef<any>();
     useEffect(() => {
         
@@ -26,44 +43,17 @@ export const useWindowSize = () => {
             const h = body.clientHeight;
 
             //creates variable to capture device size of each screen resize 
-            let deviceSize: DeviceSize;
             clearTimeout(clockRef.current)
             clockRef.current = setTimeout(() => {
               setWidth(w);
               setHeight(h);
-                if (w < 600) {
-                    console.log('Extra small device: ' + w + ' x ' + h)
-                    deviceSize = 'xSmall';
-                    setDeviceSize('xSmall');
-                }
-                else if (w >= 600 && w < 768) {
-                    console.log('Small device: ' + w + ' x ' + h)
-                    deviceSize = 'small';
-                    setDeviceSize('small');
-                }
-                else if (w >= 768 && w < 992) {
-                    console.log('Medium device: ' + w + ' x ' + h)
-                    deviceSize = 'medium';
-                    setDeviceSize('medium');
-                }
-                else if (w >= 992 && w < 1200) {
-                    console.log('Large device: ' + w + ' x ' + h)
-                    deviceSize = 'large';
-                    setDeviceSize('large');
-                }
-                else if (w <= 1200) {
-                    console.log('Extra large device: ' + w + ' x ' + h)
-                    deviceSize = 'xLarge';
-                    setDeviceSize('xLarge');
-                }
-            }, 3000)
+              const deviceSize = calcDeviceSize(w);
+              setDeviceSize(deviceSize);
+            }, 300)
 
 
         }
     }, []);
-
-
-
     return ({
         width,
         height,
@@ -72,7 +62,7 @@ export const useWindowSize = () => {
 }
 
 function App() { 
-   const windowSize = useWindowSize() ||{};
+   const windowSize = useWindowSize();
   useEffect(()=>{
     console.log(`${windowSize.width} x ${windowSize.height}, device size: ${windowSize.deviceSize}`)
   },[windowSize.width, windowSize.height, windowSize.deviceSize])
