@@ -1,5 +1,7 @@
 import { mergeStyles, mergeStyleSets } from '@fluentui/merge-styles';
 import { findByLabelText } from '@testing-library/react';
+import { NONAME } from 'dns';
+
 
 export const fieldwork = mergeStyles({
     fontFamily: 'fieldwork, sans-serif',
@@ -29,7 +31,18 @@ export const mainSection = mergeStyles({
     justifyContent: 'center',
     flexDirection: 'column',
     'p':[{justifyContent: 'center', textAlign: 'center'}, [fieldwork]],
-     
-    
-    
+})
+
+export const mainSectionImagesSmall = mergeStyles({
+    float: 'none',
+    width: '100%'
+})
+export const mainSectionImages = mergeStyles({
+    float: 'none',
+    width: '100%'
+})
+
+export const mainSectionTitle = mergeStyles({
+    textAlign: 'center',
+    //justifyContent: 'center'
 })

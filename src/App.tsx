@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavBar } from './NavBar';
-import { MainSection} from './MainSection';
+import { MainSection } from './MainSection';
 import { OurServices } from './OurServices';
 import { OurWork } from './OurWork';
 import { ContactUs } from './ContactUs';
@@ -8,24 +8,32 @@ import { ContactUs } from './ContactUs';
 import { useEffect, useRef, useState } from 'react';
 
 
-type DeviceSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
+//type DeviceSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
+export enum DeviceSize {
+    xSmall = 0,
+    small = 1,
+    medium = 2,
+    large = 3,
+    xLarge = 4,
+}
+
 
 //takes the width and returns he device size as text
-const calcDeviceSize = (w: number) =>{
+const calcDeviceSize = (w: number) => {
     if (w < 600) {
-        return 'xSmall';
+        return DeviceSize.xSmall;
     }
     else if (w >= 600 && w < 768) {
-        return 'small';
+        return DeviceSize.small;
     }
     else if (w >= 768 && w < 992) {
-        return 'medium';
+        return DeviceSize.medium;
     }
     else if (w >= 992 && w < 1200) {
-        return 'large';
+        return DeviceSize.large;
     }
-    else{
-        return 'xLarge';
+    else {
+        return DeviceSize.xLarge;
     }
 }
 
@@ -36,7 +44,7 @@ export const useWindowSize = () => {
     let [deviceSize, setDeviceSize] = useState<DeviceSize>(calcDeviceSize(body.clientWidth));
     const clockRef = useRef<any>();
     useEffect(() => {
-        
+
         body.onresize = () => {
 
             const w = body.clientWidth;
@@ -45,10 +53,10 @@ export const useWindowSize = () => {
             //creates variable to capture device size of each screen resize 
             clearTimeout(clockRef.current)
             clockRef.current = setTimeout(() => {
-              setWidth(w);
-              setHeight(h);
-              const deviceSize = calcDeviceSize(w);
-              setDeviceSize(deviceSize);
+                setWidth(w);
+                setHeight(h);
+                const deviceSize = calcDeviceSize(w);
+                setDeviceSize(deviceSize);
             }, 300)
 
 
@@ -61,22 +69,21 @@ export const useWindowSize = () => {
     })
 }
 
-function App() { 
-   const windowSize = useWindowSize();
-  useEffect(()=>{
-    console.log(`${windowSize.width} x ${windowSize.height}, device size: ${windowSize.deviceSize}`)
-  },[windowSize.width, windowSize.height, windowSize.deviceSize])
-  
-  return (
-    <div>
-     {windowSize.deviceSize === 'medium' && <NavBar></NavBar> }
-      <MainSection />
-      <OurServices />
-      <OurWork /> 
-      <ContactUs />
-    </div> 
-  );
+
+function App() {
+    const windowSize = useWindowSize();
+    useEffect(() => {
+        console.log(`${windowSize.width} x ${windowSize.height}, device size: ${windowSize.deviceSize}`)
+    }, [windowSize.width, windowSize.height, windowSize.deviceSize])
+
+    return (
+        <div>
+            <NavBar></NavBar>
+            <MainSection />
+            <OurServices />
+            <OurWork />
+            <ContactUs />
+        </div>
+    );
 }
-
-
 export default App; 
