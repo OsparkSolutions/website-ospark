@@ -12,7 +12,6 @@ export const logo = mergeStyles([fieldwork], {fontSize: '50px', color: '#f37322'
 export const navBarButtons = mergeStyles({
     display: 'flex',
     /** .navBar a{} **/
-    
     'a':[fieldwork, {textDecoration: 'none', fontSize: '20px', color: '#f37322', marginLeft: '20px', marginRight: '20px'}],
     alignItems: 'center',
 });
@@ -33,10 +32,7 @@ export const mainSection = mergeStyles({
     'p':[{justifyContent: 'center', textAlign: 'center'}, [fieldwork]],
 })
 
-export const mainSectionImagesSmall = mergeStyles({
-    float: 'none',
-    width: '100%'
-})
+
 export const mainSectionImages = mergeStyles({
     float: 'none',
     width: '100%'
@@ -45,4 +41,40 @@ export const mainSectionImages = mergeStyles({
 export const mainSectionTitle = mergeStyles({
     textAlign: 'center',
     //justifyContent: 'center'
+})
+
+export const ourWork = mergeStyles({
+    clear: 'both',
+})
+
+export const openFormStyle = mergeStyles({
+    height: '100%',
+    width: '100%',
+    position: 'fixed',
+    zIndex: '1',
+    top: '0',
+    left: '0',
+    backgroundColor: 'rgba(0,0,0, 0.9)',
+    overflowX: 'hidden',
+    transition: '0.5s',
+})
+
+export const closedFormStyle = mergeStyles({
+    height: '100%',
+    width: '0',
+    position: 'fixed',
+    zIndex: '1',
+    top: '0',
+    left: '0',
+    backgroundColor: 'rgba(0,0,0, 0.9)',
+    overflowX: 'hidden',
+    transition: '0.5s',
+})
+export const closebtn = mergeStyles({
+    position: 'absolute',
+    top: '20px',
+    right: '45px',
+    fontSize: '60px',
+    color: 'red',
+    textDecoration: 'none',
 })

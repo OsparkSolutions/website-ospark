@@ -3,6 +3,6 @@ import * as styles from './styles';
 
 export const OurWork = () =>{
     return(
-      <div>Our Work</div>
+      <div className = {styles.ourWork}>Our Work</div>
           )
 }

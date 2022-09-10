@@ -1,0 +1,10 @@
+Add 'Contact Us' button that switches CSS style to have contact us form pop up over entire screen
+
+Add an 'X' box in the corner to exit the contact form
+
+Add these to the form: firstName, lastName as two textboxes, dropdown with multiple options, multi-line textbow 
+that is resizeable ony in y-direction, submit button (when clicked have alert with data submitted), 
+
+Add clear button that clears all text from each input
+
+

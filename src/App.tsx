@@ -4,6 +4,7 @@ import { MainSection } from './MainSection';
 import { OurServices } from './OurServices';
 import { OurWork } from './OurWork';
 import { ContactUs } from './ContactUs';
+import { ContactForm } from './ContactForm'
 //import { useWindowSize } from 'toolkit/react/layoutHooks';
 import { useEffect, useRef, useState } from 'react';
 
@@ -44,9 +45,8 @@ export const useWindowSize = () => {
     let [deviceSize, setDeviceSize] = useState<DeviceSize>(calcDeviceSize(body.clientWidth));
     const clockRef = useRef<any>();
     useEffect(() => {
-
-        body.onresize = () => {
-
+        let eventListener = () => {
+            
             const w = body.clientWidth;
             const h = body.clientHeight;
 
@@ -58,9 +58,15 @@ export const useWindowSize = () => {
                 const deviceSize = calcDeviceSize(w);
                 setDeviceSize(deviceSize);
             }, 300)
-
-
         }
+
+        window.addEventListener('resize', eventListener)
+
+        const cleanup = () => {
+            window.removeEventListener('resize', eventListener)
+            } 
+        return cleanup;
+        
     }, []);
     return ({
         width,
@@ -74,15 +80,22 @@ function App() {
     const windowSize = useWindowSize();
     useEffect(() => {
         console.log(`${windowSize.width} x ${windowSize.height}, device size: ${windowSize.deviceSize}`)
+
+        return () =>{
+            console.log('i am cleaning up!' + windowSize.width);
+
+        }
+
     }, [windowSize.width, windowSize.height, windowSize.deviceSize])
 
     return (
         <div>
-            <NavBar></NavBar>
+            { windowSize.deviceSize >= DeviceSize.medium &&  <NavBar></NavBar>}
             <MainSection />
             <OurServices />
             <OurWork />
             <ContactUs />
+            <ContactForm />
         </div>
     );
 }

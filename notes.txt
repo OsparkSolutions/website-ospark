@@ -21,3 +21,33 @@
 
 Hooks can only be used inside of components,
 
+useEffect only runs once with empty array '[]' as dependency, no [] means it will run everytime
+
+Contact Us:
+	1. display form fullscreen
+		-when form is open make sure scroll bar on the body is hidden
+		-when it is closed turn the scroll bar back on (all done through js)
+	2. On form, display firstName, lastName as two textboxes, dropdown with multiple options, multi-line textbow that is resizeable ony in y-direction, submit button (when clicked have alert with data submitted), clear button
+	3. Make sure everything is bound, 
+
+CONDIIONALLY HIDE REACT COMPONENTS { expression && <Component />}
+
+ALT SHIFT F: FORMAT CODE
+
+function ====== is a variable that holds the function
+function() =====result of the function, its return value
+
+IMPORTANT VOCAB:
+
+LITERAL: what a variable points to in memory
+VARIABLES:
+PARAMATERS:
+KEYWORDS: ex. let, const
+
+
+
+
+
+
+
+
