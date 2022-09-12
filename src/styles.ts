@@ -1,4 +1,4 @@
-import { mergeStyles, mergeStyleSets } from '@fluentui/merge-styles';
+import { mergeStyles, mergeStyleSets} from '@fluentui/merge-styles';
 import { findByLabelText } from '@testing-library/react';
 import { NONAME } from 'dns';
 
@@ -77,4 +77,13 @@ export const closebtn = mergeStyles({
     fontSize: '60px',
     color: 'red',
     textDecoration: 'none',
+})
+export const formContainer = mergeStyles({
+    textAlign: 'center',
+    
+})
+export const firstName = mergeStyles({
+    color: 'white',
+    fontFamily: 'fieldwork, sans-serif',
+    textAlign: 'center',
 })
