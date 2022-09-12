@@ -19,13 +19,14 @@ export const ContactForm = () => {
         <div>
             <div className={isOpen ? styles.openFormStyle : styles.closedFormStyle}>
                 <a href="javascript:void(0)" className={styles.closebtn} onClick={() => setIsOpen(false)}>&times;</a>
-                <div>
-                    <input></input>
-                </div>
+            
+                <form className = 'formContainer'>
+                    <label className = 'inputLabels' htmlFor="firstName">First Name</label>
+                    <br></br>
+                    <input id='firstName'></input>
+                </form>
             </div>
 
-
-            
             <button onClick={() => setIsOpen(true)}>Contact Us</button>
           
         </div>
