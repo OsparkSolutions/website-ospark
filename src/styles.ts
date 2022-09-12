@@ -79,11 +79,29 @@ export const closebtn = mergeStyles({
     textDecoration: 'none',
 })
 export const formContainer = mergeStyles({
-    textAlign: 'center',
-    
+    display: 'flex',
+    justifyContent: 'center',
+    justifyItems: 'center',
+    flexDirection: 'column',
 })
-export const firstName = mergeStyles({
+export const labels = mergeStyles({
     color: 'white',
     fontFamily: 'fieldwork, sans-serif',
+    textAlign: 'center',
+    paddingTop: '20px',
+})
+export const nameInput = mergeStyles({
+    width: '200px',
+    justifyContent: 'center',
+    borderStyle: 'solid',
+    justifySelf: 'center',
+    margin: 'auto',
+})
+export const dropDown = mergeStyles({
+    width: '200px',
+    justifyContent: 'center',
+    borderStyle: 'solid',
+    justifySelf: 'center',
+    margin: 'auto',
     textAlign: 'center',
 })
