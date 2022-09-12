@@ -7,7 +7,7 @@ export const fieldwork = mergeStyles({
     fontFamily: 'fieldwork, sans-serif',
 })
 
-export const logo = mergeStyles([fieldwork], {fontSize: '50px', color: '#f37322'});
+export const logo = mergeStyles(fieldwork, {fontSize: '50px', color: '#f37322'});
 
 export const navBarButtons = mergeStyles({
     display: 'flex',
@@ -104,4 +104,26 @@ export const dropDown = mergeStyles({
     justifySelf: 'center',
     margin: 'auto',
     textAlign: 'center',
+})
+export const messageInput = mergeStyles({
+    width: '400px',
+    height: '200px',
+    justifyContent: 'center',
+    borderStyle: 'solid',
+    justifySelf: 'center',
+    margin: 'auto',
+    resize: 'vertical' 
+})
+export const submit = mergeStyles({
+    width: '100px',
+    margin: '5px',
+
+})
+export const clear = mergeStyles({
+    width: '100px',
+    margin: '5px',
+})
+export const buttonContainer = mergeStyles({
+    margin: 'auto',
+    border: '1px solid white',
 })

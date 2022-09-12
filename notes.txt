@@ -44,7 +44,8 @@ VARIABLES:
 PARAMATERS:
 KEYWORDS: ex. let, const
 
-
+MergeSyles:
+-can nest oher elements to achieve organized styling
 
 
 
