@@ -11,6 +11,7 @@ export const logo = mergeStyles(fieldwork, {fontSize: '50px', color: '#f37322'})
 
 export const navBarButtons = mergeStyles({
     display: 'flex',
+    marginLeft: 'auto',
     /** .navBar a{} **/
     'a':[fieldwork, {textDecoration: 'none', fontSize: '20px', color: '#f37322', marginLeft: '20px', marginRight: '20px'}],
     alignItems: 'center',
@@ -23,13 +24,27 @@ export const header = mergeStyles({
     justifyContent: 'space-between',
 });
 
+export const mainBackground = mergeStyles({
+    backgroundColor: '#86E5EB',
+})
+
 export const mainSection = mergeStyles({
-    paddingTop: '300px',
+    margin: 'auto',
+    width: '800px',
+    paddingTop: '150px',
+    paddingBottom: '0px',
     display: 'flex',
     alignContent: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
     'p':[{justifyContent: 'center', textAlign: 'center'}, [fieldwork]],
+})
+export const mainParagraph = mergeStyles({
+    fontSize: 'x-large',
+    lineHeight: '150%',
+})
+export const slogan = mergeStyles({
+    marginTop: '100px',
 })
 
 
@@ -126,4 +141,24 @@ export const clear = mergeStyles({
 export const buttonContainer = mergeStyles({
     margin: 'auto',
     border: '1px solid white',
+})
+export const contactButtonContainer = mergeStyles({
+    width: '130px',
+    height: '40px',
+    textAlign: 'center',
+    margin: 'auto',
+})
+export const contactButton = mergeStyles({
+    outline: 'none',
+    height: '40px',
+    textAlign: 'center',
+    width: '130px',
+    borderRadius: '40px',
+    background: '#fff',
+    border: '2px solid orange',
+    color: 'orange',
+    letterSpacing: '1px',
+    textShadow: '0',
+    cursor: 'pointer',
+    transition: 'all 0.25s ease',
 })

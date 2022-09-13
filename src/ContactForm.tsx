@@ -57,9 +57,9 @@ export const ContactForm = () => {
                     
                 </form>
             </div>
-
-            <button onClick={() =>  setIsOpen(true)}>Contact Us</button>
-          
+            <div className = {styles.contactButtonContainer}>      
+                <button className = {styles.contactButton} onClick={() => setIsOpen(true)}>Contact Us</button>
+            </div>
         </div>
     );
 

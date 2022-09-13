@@ -1,5 +1,6 @@
 import React from 'react';
 import * as styles from './styles'
+import { ContactForm } from './ContactForm';
 
 export const NavBar = () =>{
     return(

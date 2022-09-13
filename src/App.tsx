@@ -91,7 +91,6 @@ function App() {
     return (
         <div>
             { windowSize.deviceSize >= DeviceSize.medium &&  <NavBar></NavBar>}
-            <ContactForm />
             <MainSection />
             <OurServices />
             <OurWork />
