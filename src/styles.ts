@@ -18,11 +18,17 @@ export const navBarButtons = mergeStyles({
 });
 
 export const header = mergeStyles({
+    position: 'fixed',
+    width: '100%',
+});
+
+export const navBarContainer = mergeStyles({
     display: 'flex',
     padding: '20px',
     alignItems: 'center',
     justifyContent: 'space-between',
-});
+
+})
 
 export const mainBackground = mergeStyles({
     backgroundColor: '#86E5EB',
@@ -161,4 +167,17 @@ export const contactButton = mergeStyles({
     textShadow: '0',
     cursor: 'pointer',
     transition: 'all 0.25s ease',
+})
+
+export const successMessageShown = mergeStyles({
+    color: 'white',
+    margin: 'auto',
+    display: 'flex',
+    justifyContent: 'center',
+})
+export const successMessageHidden = mergeStyles({
+    visibility: 'hidden',
+    margin: 'auto',
+    display: 'flex',
+    justifyContent: 'center',
 })

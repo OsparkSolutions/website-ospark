@@ -47,7 +47,7 @@ KEYWORDS: ex. let, const
 MergeSyles:
 -can nest oher elements to achieve organized styling
 
-
+boolean followed by && <Element> to hide por show jsx
 
 
 
