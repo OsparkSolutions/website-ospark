@@ -49,6 +49,10 @@ MergeSyles:
 
 boolean followed by && <Element> to hide por show jsx
 
+HTTP Status Code:
+	Returns status codes as numbers ex(303, 404,...)
 
+fetch:
+	-Method to make web calls
 
 
