@@ -1,6 +1,7 @@
 import { Stylesheet } from "@fluentui/merge-styles";
 import { MouseEventHandler, useState } from "react";
 import { ContactFormProps } from "./App";
+import { runAsync } from "./helper";
 import * as styles from "./styles";
 
 
@@ -22,9 +23,15 @@ export const ContactForm = (props: ContactFormProps) => {
     }
 
     const formSubmissionalert = (ev: any) => {
-        alert(
-            `First name: ${firstName} \nLast name: ${lastName} \nSelection: ${selection} \nMessage: ${textArea}`
-        );
+        runAsync(async () =>{
+            const requestURL = `/contactform?a=${a}&b=${b}`
+            console.log(requestURL)
+            const response = await fetch(requestURL)
+            if(response.ok){
+              const responseText = await response.text()
+              console.log(JSON.parse(responseText).result);
+            }
+          })
         setIsSubmitted(true);
         ev.preventDefault();
     }

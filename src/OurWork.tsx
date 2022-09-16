@@ -7,6 +7,7 @@ export const OurWork = () => {
   const aRef = useRef<HTMLInputElement>(null)
   const bRef = useRef<HTMLInputElement>(null)
   
+
     return (
       <div>
         <input ref={aRef}></input><br></br>
@@ -38,8 +39,8 @@ export const OurWork = () => {
           })
         }}>Subtract</button>
         <button onClick={()=>{
-          const a = aRef.current?.value
-          const b = bRef.current?.value
+            const a = aRef.current?.value
+                const b = bRef.current?.value
           runAsync(async () =>{
             const requestURL = `/multiply?a=${a}&b=${b}`
             console.log(requestURL)
