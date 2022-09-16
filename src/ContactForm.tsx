@@ -24,12 +24,13 @@ export const ContactForm = (props: ContactFormProps) => {
 
     const formSubmissionalert = (ev: any) => {
         runAsync(async () =>{
-            const requestURL = `/contactform?a=${a}&b=${b}`
+            const requestURL = `/contactform?firstName=${firstName}&lastName=${lastName}`
             console.log(requestURL)
             const response = await fetch(requestURL)
             if(response.ok){
-              const responseText = await response.text()
-              console.log(JSON.parse(responseText).result);
+                console.log('is ok')
+                const responseText = await response.text()
+                console.log(JSON.parse(responseText).result);
             }
           })
         setIsSubmitted(true);
