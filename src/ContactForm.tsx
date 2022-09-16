@@ -1,11 +1,11 @@
 import { Stylesheet } from "@fluentui/merge-styles";
 import { MouseEventHandler, useState } from "react";
+import { ContactFormProps } from "./App";
 import * as styles from "./styles";
 
 
-export const ContactForm = () => {
+export const ContactForm = (props: ContactFormProps) => {
     //tracks the state of contact form overlay whether or not its open
-    const [isOpen, setIsOpen] = useState(false);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [selection, setSelection] = useState('0');
@@ -17,8 +17,8 @@ export const ContactForm = () => {
         setFirstName('');
         setLastName('');
         setTextArea('');
-        setSelection('0')
-        ev.preventDefault()
+        setSelection('0');
+        ev.preventDefault();
     }
 
     const formSubmissionalert = (ev: any) => {
@@ -30,8 +30,8 @@ export const ContactForm = () => {
     }
     return (
         <div>
-            <div className={isOpen ? styles.openFormStyle : styles.closedFormStyle}>
-                <a href="javascript:void(0)" className={styles.closebtn} onClick={() => setIsOpen(false)}>&times;</a>
+            <div className={props.isOpen ? styles.openFormStyle : styles.closedFormStyle}>
+                <a href="javascript:void(0)" className={styles.closebtn} onClick={() => props.setIsOpen(false)}>&times;</a>
 
                 <form className={styles.formContainer}>
                     <label className={styles.labels} htmlFor="firstName">First Name</label><br></br>
@@ -64,9 +64,6 @@ export const ContactForm = () => {
 
                 </form>
                 {isSubmitted && <h1 style={{ color: 'white' }} className={styles.successMessageShown} >Success!</h1>}
-            </div>
-            <div className={styles.contactButtonContainer}>
-                <button className={styles.contactButton} onClick={() => setIsOpen(true)}>Contact Us</button>
             </div>
         </div>
     );

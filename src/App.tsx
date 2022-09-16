@@ -9,6 +9,8 @@ import { ContactForm } from './ContactForm'
 import { useEffect, useRef, useState } from 'react';
 
 
+
+
 //type DeviceSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
 export enum DeviceSize {
     xSmall = 0,
@@ -75,8 +77,15 @@ export const useWindowSize = () => {
     })
 }
 
-
+export interface ContactFormProps {
+    isOpen: boolean;
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  }
 function App() {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+
     const windowSize = useWindowSize();
     useEffect(() => {
         console.log(`${windowSize.width} x ${windowSize.height}, device size: ${windowSize.deviceSize}`)
@@ -88,14 +97,17 @@ function App() {
 
     }, [windowSize.width, windowSize.height, windowSize.deviceSize])
 
+
+
+    
     return (
         <div>
-            { windowSize.deviceSize >= DeviceSize.medium &&  <NavBar></NavBar>}
+            { windowSize.deviceSize >= DeviceSize.medium &&  <NavBar isOpen={isOpen} setIsOpen={setIsOpen}></NavBar>}
             <MainSection />
             <OurServices />
             <OurWork />
             <ContactUs />
-            <ContactForm />
+            <ContactForm isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
     );
 }
