@@ -10,60 +10,7 @@ export const OurWork = () => {
 
     return (
       <div>
-        <input ref={aRef}></input><br></br>
-        <input ref={bRef} ></input><br></br>
-        <button onClick={()=>{
-          const a = aRef.current?.value
-          const b = bRef.current?.value
-          runAsync(async () =>{
-            const requestURL = `/add?a=${a}&b=${b}`
-            console.log(requestURL)
-            const response = await fetch(requestURL)
-            if(response.ok){
-              const responseText = await response.text()
-              console.log(JSON.parse(responseText).result);
-            }
-          })
-        }} >Add</button>
-        <button onClick={()=>{
-          const a = aRef.current?.value
-          const b = bRef.current?.value
-          runAsync(async () =>{
-            const requestURL = `/subtract?a=${a}&b=${b}`
-            console.log(requestURL)
-            const response = await fetch(requestURL)
-            if(response.ok){
-              const responseText = await response.text()
-              console.log(JSON.parse(responseText).result);
-            }
-          })
-        }}>Subtract</button>
-        <button onClick={()=>{
-            const a = aRef.current?.value
-                const b = bRef.current?.value
-          runAsync(async () =>{
-            const requestURL = `/multiply?a=${a}&b=${b}`
-            console.log(requestURL)
-            const response = await fetch(requestURL)
-            if(response.ok){
-              const responseText = await response.text()
-              console.log(JSON.parse(responseText).result);
-            }
-          })
-        }}>Multiply</button>
-        <button onClick={()=>{
-          const a = aRef.current?.value
-          const b = bRef.current?.value
-          runAsync(async () =>{
-            const requestURL = `/divide?a=${a}&b=${b}`
-            console.log(requestURL)
-            const response = await fetch(requestURL)
-            if(response.ok){
-              const responseText = await response.text()
-              console.log(JSON.parse(responseText).result);
-            }
-          })
-        }}>Divide</button>
+        
       </div>
       
     )

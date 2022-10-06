@@ -55,6 +55,8 @@ HTTP Status Code:
 fetch:
 	-Method to make web calls
 
+When there is a value for the input, it needs to show label up top
+
 
 
 

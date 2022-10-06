@@ -105,6 +105,12 @@ export const formContainer = mergeStyles({
     justifyItems: 'center',
     flexDirection: 'column',
 })
+export const contactHeading = mergeStyles({
+    color: 'white',
+    fontFamily: 'fieldwork, sans-serif',
+    textAlign: 'center',
+    paddingTop: '20px',
+})
 export const labels = mergeStyles({
     color: 'white',
     fontFamily: 'fieldwork, sans-serif',
@@ -112,6 +118,13 @@ export const labels = mergeStyles({
     paddingTop: '20px',
 })
 export const nameInput = mergeStyles({
+    width: '200px',
+    justifyContent: 'center',
+    borderStyle: 'solid',
+    justifySelf: 'center',
+    margin: 'auto',
+})
+export const emailInput = mergeStyles({
     width: '200px',
     justifyContent: 'center',
     borderStyle: 'solid',
