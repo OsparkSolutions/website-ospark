@@ -8,12 +8,20 @@ export const NavBar = (props: ContactFormProps) =>{
     return(
       <header className = {styles.header}>
         <div className = {styles.navBarContainer}>
-          <div className = {styles.logo}>OrangeSpark</div>
+          <a href='#'className = {styles.logo}>Orange<span>Spark</span></a>
           <div className = {styles.navBarButtons}>
-            <a href='#' onClick={() => props.setIsOpen(true)}>Contact Us</a>
-            <a href="#">Our Solution</a>
-            <a href="#">Past Projects</a>
-            <a href="#">Meet Us</a>
+            <a href='#' onClick={() => props.setIsOpen(true)}>
+              <p>Contact Us</p>
+            </a>
+            <a href="#">
+              <p>Our Services</p>
+            </a>
+            <a href="#">
+              <p>Past Work</p>
+            </a>
+            <a href="#">
+              <p>Meet Us</p>
+            </a>
           </div>
         </div>
       </header>

@@ -7,9 +7,21 @@ import { ContactUs } from './ContactUs';
 import { ContactForm } from './ContactForm'
 //import { useWindowSize } from 'toolkit/react/layoutHooks';
 import { useEffect, useRef, useState } from 'react';
+import { Footer } from './Footer';
+import './fonts.css'
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import ReactDOM from 'react-dom'
+import { faTwitter, faFontAwesome } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook } from '@fortawesome/free-brands-svg-icons'
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faLocationDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 
-
+library.add(fas, faTwitter, faFacebook, faGithub, faLinkedin, faLocationDot, faPhone, faEnvelope)
 
 //type DeviceSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
 export enum DeviceSize {
@@ -106,8 +118,8 @@ function App() {
             <MainSection />
             <OurServices />
             <OurWork />
-            <ContactUs />
             <ContactForm isOpen={isOpen} setIsOpen={setIsOpen} />
+            <Footer />
         </div>
     );
 }

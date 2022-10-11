@@ -5,8 +5,8 @@ export const MainSection = () =>{
     return(
         <div className = {styles.mainBackground}>
             <div className = {styles.mainSection}>
-                <p className={styles.mainParagraph}> Orange Spark Solutions, LLC is a technology solutions provider. We work with Startups, Small & Mid-sized businesses on specialized projects or as a full-service technologypartner. We work closely with you to provide effiecient, scalable, right-sized technology solutions at reasonable costs.</p>
-                <p className={styles.slogan}>Got tech problems. We have the solutions.</p>
+                <p className={styles.mainParagraph}> Orange Spark Solutions, LLC is a <span className={styles.orangeText}>technology solutions</span> provider. We work with <span className={styles.blueText}>Startups, Small</span> & <span className={styles.blueText}>Mid-sized</span> businesses on <span className={styles.orangeText}>specialized projects</span> or as a <span className={styles.orangeText}>full-service technology partner</span>. We work closely with you to provide <span className={styles.blueText}>effiecient, scalable, right-sized</span> technology solutions at <span className={styles.orangeText}>reasonable costs</span>.</p>
+                <p className={styles.slogan}><i>Got tech problems? We have the solutions.</i></p>
             </div>
         </div>
     )
