@@ -58,5 +58,7 @@ fetch:
 When there is a value for the input, it needs to show label up top
 
 
-
+DEPENDENCIES AND STATES ARE ONLY UPDATED WHEN VALUES CHANGE
+-when our state is an Array[] *array of arrays*, React will not know to update the state
+-to fix this issue, pass the state a copy of the array and use the expander(...)
 

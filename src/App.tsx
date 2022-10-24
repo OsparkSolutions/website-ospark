@@ -10,11 +10,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Footer } from './Footer';
 import './fonts.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
-
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import ReactDOM from 'react-dom'
 import { faTwitter, faFontAwesome } from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -103,7 +100,7 @@ function App() {
         console.log(`${windowSize.width} x ${windowSize.height}, device size: ${windowSize.deviceSize}`)
 
         return () =>{
-            console.log('i am cleaning up!' + windowSize.width);
+            //console.log('i am cleaning up!' + windowSize.width);
 
         }
 

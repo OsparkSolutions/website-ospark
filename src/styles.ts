@@ -3,7 +3,7 @@ import { findByLabelText } from '@testing-library/react';
 import { NONAME } from 'dns';
 import { readBuilderProgram } from 'typescript';
 
-
+export const orange = mergeStyles({color: '#f37322'})
 export const fieldwork = mergeStyles({
     fontFamily: 'fieldwork, sans-serif',
 })
@@ -32,7 +32,8 @@ export const header = mergeStyles({
     width: '100%',
     backgroundColor: 'rgba(0,0,0,0.1)',
     //blurs nav bar
-    backdropFilter: 'blur(8px)'
+    backdropFilter: 'blur(8px)',
+    zIndex: '9',
 });
 
 export const navBarContainer = mergeStyles({
@@ -41,11 +42,16 @@ export const navBarContainer = mergeStyles({
     justifyContent: 'space-between',
 
 })
-
+export const dynamicSpark = mergeStyles({
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+})
 export const mainBackground = mergeStyles({
     backgroundColor: 'white',
     marginBottom: '200px',
-    paddingTop: '150px'
+    paddingTop: '150px',
+    position: 'relative',
 })
 
 export const mainSection = mergeStyles({
@@ -61,6 +67,34 @@ export const mainSection = mergeStyles({
     alignItems: 'center',
     'p':[{justifyContent: 'center', textAlign: 'center'}, [fieldwork]],
 })
+//Three.js parameters
+export const parameterContainer = mergeStyles({
+    padding: '20px',
+    backgroundColor: '#DEDEDE'
+})
+export const sliderContainer = mergeStyles({
+    width: '100%',
+    paddingTop: '20px',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+})
+export const subSliderContainer = mergeStyles({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '250px',
+    margin: '0 10px 10px 0',
+    backgroundColor: 'rgb(181,176,176)',
+    padding: '10px',
+    borderRadius: '10px'
+    
+})
+export const slider = mergeStyles({
+    
+})
+
+
+
 export const mainParagraph = mergeStyles({
     fontSize: 'x-large',
     lineHeight: '150%',
@@ -76,18 +110,40 @@ export const slogan = mergeStyles({
 })
 
 export const sectionHeader = mergeStyles({
-    fontFamily: 'fieldwork-hum, sans-serif',
+    fontFamily: 'fieldwork, sans-serif',
     textAlign: 'center',
-
+    marginBottom:'75px',
+    fontSize: '50px'
 })
-export const mainSectionImages = mergeStyles({
-    float: 'none',
-    width: '80%'
+export const largeScreenImageContainer = mergeStyles({
+    width: '80%',
+    display: 'flex',
+    flexDirection: 'row'
+})
+export const smallScreenImageContainer = mergeStyles({
+    display:'flex',
+    alignItems: 'center', 
+    flexDirection:'column',
+    marginBottom: '200px',
+})
+export const leftLargeImage = mergeStyles({
+    float: 'left',
+    width: '30%',
+    display:'flex',
+    alignItems: 'center', 
+    flexDirection:'column',
+})
+export const subTextContainer = mergeStyles({
+    marginLeft: '50px'
+})
+export const servicesParagraph = mergeStyles({
+    fontFamily: 'fieldwork, sans-serif',
+    lineHeight: '2',
 })
 
 export const mainSectionTitle = mergeStyles({
     textAlign: 'center',
-    //justifyContent: 'center'
+    fontFamily: 'fieldwork, sans-serif'
 })
 
 export const ourWork = mergeStyles({
@@ -366,7 +422,7 @@ export const footer = mergeStyles({
         fontSize: '20px',
         color: '#ffffff',
         textAlign: 'center',
-        lineHeight: '35px',
+        lineHeight: '40px',
 
         marginRight: '3px',
         marginBottom: '5px',
