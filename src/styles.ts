@@ -50,7 +50,7 @@ export const dynamicSpark = mergeStyles({
 export const mainBackground = mergeStyles({
     backgroundColor: 'white',
     marginBottom: '200px',
-    paddingTop: '150px',
+    paddingTop: '60.667px',
     position: 'relative',
 })
 
@@ -70,11 +70,12 @@ export const mainSection = mergeStyles({
 //Three.js parameters
 export const parameterContainer = mergeStyles({
     padding: '20px',
-    backgroundColor: '#DEDEDE'
+    backgroundColor: '#DEDEDE',
+    borderStyle: 'solid',
+    
 })
 export const sliderContainer = mergeStyles({
     width: '100%',
-    paddingTop: '20px',
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap'

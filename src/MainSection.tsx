@@ -8,14 +8,12 @@ import InputSlider from './InputSlider';
 
 // import './resources/Three'
 //colors, pulse rate, #of shells
-const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newParameters: Shell[], sliderValueX: number, rotation: number) => {
+const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newParameters: Shell[], sliderValueX: number, rotation: number, pulseRate: number) => {
 
     const windowSize = useWindowSize();
     useEffect(() => {
         // if (!THREE.Supports.webgl) {
-
         //     document.getElementById("oldie").style.display = "block";
-
         // }
 
         let SCREEN_WIDTH = window.innerWidth,
@@ -60,7 +58,7 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newP
                 parameters = newParameters,
                 geometry = new THREE.Geometry();
 
- 
+
             for (i = 0; i < 1500; ++i) {
 
                 vector1 = new THREE.Vector3(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
@@ -83,7 +81,7 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newP
                 line.scale.x = line.scale.y = line.scale.z = p[0];
                 line.originalScale = p[0];
                 line.rotation.y = Math.random() * Math.PI;
-                
+
 
                 line.updateMatrix();
 
@@ -151,7 +149,7 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newP
         function loop() {
 
             //  camera.position.x += ( mouseX - camera.position.x ) * .05;
-            //    camera.position.y += (- mouseY + 200 - camera.position.y) * .05;
+            //  camera.position.y += (- mouseY + 200 - camera.position.y) * .05;
             camera.updateMatrix();
 
             renderer.render(scene, camera);
@@ -162,7 +160,11 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newP
                 //Rotation controller
                 scene.objects[i].rotation.y = time * (i < 4 ? i + 1 : - (i + 1)) * rotation;
 
-                if (i < 5) scene.objects[i].scale.x = scene.objects[i].scale.y = scene.objects[i].scale.z = scene.objects[i].originalScale * (i / 5 + 1) * (1 + 0.5 * Math.sin(7 * time));
+                if (i < 5)
+                    scene.objects[i].scale.x =
+                        scene.objects[i].scale.y =
+                        scene.objects[i].scale.z =
+                        (scene.objects[i].originalScale * (i / 5 + 1) * (1 + 0.5 * Math.sin(7 * time * pulseRate)));
 
             }
 
@@ -174,7 +176,7 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newP
             clearInterval(interval);
         }
         return cleanUp;
-    }, [rValue, windowSize.width, windowSize.height, newParameters, mainRef, sliderValueX, rotation])
+    }, [rValue, windowSize.width, windowSize.height, newParameters, mainRef, sliderValueX, rotation, pulseRate])
 }
 
 type Shell = [
@@ -192,7 +194,9 @@ export const MainSection = () => {
     const [rValue, setRValue] = useState<string>('1000');
     const [shells, setShells] = useState<Shell[]>([[...initialArray]]);
     const [sliderValueX, setSliderValueX] = useState<number | number[]>(50);
-    const[rotation, setRotation] = useState<number>();
+    const [rotation, setRotation] = useState<number>(1);
+    const [pulseRate, setPulseRate] = useState<number>(1);
+    const [isOpen, setIsOpen] = useState<boolean>(false)
 
     const addDefaultShell = () => {
         setShells((prevParameters) => [...prevParameters, [...initialArray]]);
@@ -211,38 +215,18 @@ export const MainSection = () => {
     // }
 
     const mainRef = useRef<HTMLDivElement>(null);
-    useSpark(mainRef, Number(rValue), shells, sliderValueX as number, rotation as number)
+    useSpark(mainRef, Number(rValue), shells, sliderValueX as number, rotation as number, pulseRate as number)
     return (
         <div className={styles.mainBackground}>
-            <label htmlFor='rVal'> Universal Radius Scale
-                <input value={rValue} id='rVal' onInput={(ev) => {
-                    setRValue(ev.currentTarget.value)
-                }}></input>
-            </label>
-            <button onClick={addDefaultShell}>Add shell</button><br />
-            <div className={styles.parameterContainer}>
-                {/* <label htmlFor='aValue'>A-Value</label>
-                <input value={aValue} id='aValue' onInput={(ev) => {
-                    setAValue(Number(ev.currentTarget.value))
-                }}></input>
-                <label htmlFor='color'>Color (Ex. 0xff7700)</label>
-                <input type='color' value={color} id='aValue' onInput={(ev) => {
-                    // let hexValue = parseInt(ev.currentTarget.value.substring(1), 16)
-                    setColor(ev.currentTarget.value)
-                }}></input>
-                <label htmlFor='cValue'>C-Value</label>
-                <input value={bValue} id='aValue' onInput={(ev) => {
-                    setBValue(ev.currentTarget.value)
-                }}></input>
-                <label htmlFor='dValue'>D-Value</label>
-                <input value={bValue} id='aValue' onInput={(ev) => {
-                    setCValue(ev.currentTarget.value)
-                }}></input>
-                <button onClick={addCustomShell}>Add</button>
-                Slider Section */}
+            {/* Parameter Box */}
+            {isOpen && <div className={styles.parameterContainer}>
+                <label htmlFor='rVal'> Universal Radius Scale
+                    <input style={{ width: '60px' }} value={rValue} id='rVal' onInput={(ev) => {
+                        setRValue(ev.currentTarget.value)
+                    }}></input>
+                </label><br></br>
+                <button onClick={addDefaultShell}>Add shell</button><br />
                 <div className={styles.sliderContainer}>
-                    {/* A-Value Slider
-                    <Slider min={0} max={1000} onChange={handleAValueChange} /> */}
                     {shells.map((shell, index) => {
                         return (
                             <div className={styles.subSliderContainer}>
@@ -253,28 +237,36 @@ export const MainSection = () => {
                                     shell[0] = value as number / 100;
                                     setShells([...shells])
                                 }} min={0} max={100} value={shell[0] * 100} />
-                                <input value={shell[0]*100} onInput={(ev)=>{
-                                    shell[0] = Number(ev.currentTarget.value) /100
+                                <input value={shell[0] * 100} onInput={(ev) => {
+                                    shell[0] = Number(ev.currentTarget.value) / 100
                                     setShells([...shells])
-                                }} style={{width: '25px'}}></input>
+                                }} style={{ width: '25px' }}></input>
 
                                 <p>Opacity:</p>
                                 <Slider className={styles.slider} onChange={(ev, value) => {
                                     shell[2] = value as number / 100;
                                     setShells([...shells])
                                 }} min={0} max={100} value={shell[2] * 100} />
-                                <input value={shell[2]*100} onInput={(ev)=>{
-                                    shell[2] = Number(ev.currentTarget.value) /100
+                                <input value={shell[2] * 100} onInput={(ev) => {
+                                    shell[2] = Number(ev.currentTarget.value) / 100
                                     setShells([...shells])
-                                }} style={{width: '25px'}}></input>
+                                }} style={{ width: '25px' }}></input>
 
                                 <p>Rotation Speed</p>
-                                <Slider className={styles.slider} onChange={(ev, value) => {
+                                <Slider className={styles.slider} value={rotation} onChange={(ev, value) => {
                                     setRotation(value as number)
-                                }} min={0} max={20}/>
-                                <input value={rotation} onInput={(ev)=>{
+                                }} min={0} max={20} />
+                                <input type='number' value={rotation} onInput={(ev) => {
                                     setRotation(Number(ev.currentTarget.value))
-                                }} style={{width: '25px'}}></input>
+                                }} style={{ width: '40px' }}></input>
+
+                                <p>Pulse Rate:</p>
+                                <Slider min={0} max={100} className={styles.slider} onChange={(ev, value) => {
+                                    setPulseRate(value as number * .05)
+                                }} />
+                                <input type='number' value={pulseRate} onInput={(ev) => {
+                                    setPulseRate(Number(ev.currentTarget.value))
+                                }} style={{ width: '40px' }}></input>
 
                                 <p>Color: </p>
                                 <input type='color' value={'#' + shell[1].toString(16)} onChange={(ev) => {
@@ -282,14 +274,16 @@ export const MainSection = () => {
                                     shell[1] = Number(hexValue)
                                     setShells([...shells])
                                 }}></input>
-
-
                             </div>
                         )
                     })}
                 </div>
-
-            </div>
+            </div>}
+            {/* End Parameter Box */}
+            <button onClick={() => {
+                setIsOpen(!isOpen)
+                console.log(isOpen)
+            }}>Settings</button>
             <div className={styles.dynamicSpark} ref={mainRef}></div>
 
             {/* Start of main section */}
