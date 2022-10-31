@@ -4,7 +4,7 @@ import { DeviceSize, useWindowSize } from './useWindowSize';
 import Slider from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
 import InputSlider from './InputSlider';
-
+import * as  THREE from 'three'
 
 // import './resources/Three'
 //colors, pulse rate, #of shells
@@ -26,9 +26,13 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newP
             windowHalfX = window.innerWidth / 2,
             windowHalfY = window.innerHeight / 2,
 
-            camera: any, scene: any, renderer: any,
+            camera: any, scene: THREE.Scene, renderer: any,
 
             stats;
+
+
+        const lines: THREE.LineSegments[] = [];
+        const scales: number[] = [];
 
         init();
         const interval = setInterval(loop, 3000 / 60);
@@ -42,7 +46,7 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newP
 
 
             // camera = new THREE.Camera(80, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 3000);
-            camera = new THREE.Camera(80, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 3000);
+            camera = new THREE.PerspectiveCamera(80, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 3000);
 
             camera.position.z = 1000;
 
@@ -56,9 +60,11 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newP
                 // parameters = [[0.25, 0xff7700, 1, 2], [0.5, 0xff9900, 1, 1], [0.75, 0xffaa00, 0.75, 1], [1, 0xffaa00, 0.5, 1], [1.25, 0x000833, 0.8, 1],
                 // [3.0, 0xaaaaaa, 0.75, 2], [3.5, 0xffffff, 0.5, 1], [4.5, 0xffffff, 0.25, 1], [5.5, 0xffffff, 0.125, 1]],
                 parameters = newParameters,
-                geometry = new THREE.Geometry();
+                //geometry = new THREE.Geometry();
+                geometry = new THREE.BufferGeometry()
 
 
+            const points: THREE.Vector3[] = []
             for (i = 0; i < 1500; ++i) {
 
                 vector1 = new THREE.Vector3(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
@@ -68,18 +74,26 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newP
                 vector2 = vector1.clone();
                 vector2.multiplyScalar(Math.random() * 0.09 + 1);
 
-                geometry.vertices.push(new THREE.Vertex(vector1));
-                geometry.vertices.push(new THREE.Vertex(vector2));
+                //LJ: geometry.vertices.push(new THREE.Vertex(vector1));
+                //LJ: geometry.vertices.push(new THREE.Vertex(vector2));
+                points.push(vector1);
+                points.push(vector2); points.push()
 
             }
+            geometry.setFromPoints(points);
+
 
             for (i = 0; i < parameters.length; ++i) {
                 p = parameters[i];
 
-                material = new THREE.LineBasicMaterial({ color: p[1], opacity: p[2], linewidth: p[3] });
-                line = new THREE.Line(geometry, material, THREE.LinePieces);
+                material = new THREE.LineBasicMaterial({ color: p[1], opacity: p[2], linewidth:30/* p[3]*/ });
+                //LJ:line = new THREE.Line(geometry, material, THREE.LinePieces);
+                //line = new THREE.LineSegments(geometry, material);
+                lines.push(
+                    line = new THREE.LineSegments(geometry, material /*THREE.LinePieces*/));
                 line.scale.x = line.scale.y = line.scale.z = p[0];
-                line.originalScale = p[0];
+                //LJ: line.originalScale = p[0];
+                scales.push(p[0]);
                 line.rotation.y = Math.random() * Math.PI;
 
 
@@ -88,12 +102,16 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newP
                 // line.position.x = 400
                 // line.position.y = -400
 
-                scene.addObject(line);
+                //LJ:scene.addObject(line);
+                scene.add(line);
 
 
             }
 
-            renderer = new THREE.WebGLRenderer();
+            renderer = new THREE.WebGLRenderer({
+                //LJ: Added
+                antialias:true
+            });
             renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
             if (container)
                 container.innerHTML = ''
@@ -156,15 +174,26 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, rValue: number, newP
 
             var time = new Date().getTime() * 0.0001;
 
-            for (var i = 0; i < scene.objects.length; i++) {
-                //Rotation controller
-                scene.objects[i].rotation.y = time * (i < 4 ? i + 1 : - (i + 1)) * rotation;
+            // for (var i = 0; i < scene.objects.length; i++) {
+            //     //Rotation controller
+            //     scene.objects[i].rotation.y = time * (i < 4 ? i + 1 : - (i + 1)) * rotation;
 
+            //     if (i < 5)
+            //         scene.objects[i].scale.x =
+            //             scene.objects[i].scale.y =
+            //             scene.objects[i].scale.z =
+            //             (scene.objects[i].originalScale * (i / 5 + 1) * (1 + 0.5 * Math.sin(7 * time * pulseRate)));
+
+            // }
+            for (var i = 0; i < lines.length; i++) {
+                //Rotation controller
+                lines[i].rotation.y = time * (i < 4 ? i + 1 : - (i + 1)) * rotation;
+                console.log("LINES" + i);
                 if (i < 5)
-                    scene.objects[i].scale.x =
-                        scene.objects[i].scale.y =
-                        scene.objects[i].scale.z =
-                        (scene.objects[i].originalScale * (i / 5 + 1) * (1 + 0.5 * Math.sin(7 * time * pulseRate)));
+                    lines[i].scale.x =
+                        lines[i].scale.y =
+                        lines[i].scale.z =
+                        (scales[i] * (i / 5 + 1) * (1 + 0.5 * Math.sin(7 * time * pulseRate)));
 
             }
 
