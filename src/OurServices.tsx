@@ -1,7 +1,7 @@
 import { mergeStyles } from '@fluentui/merge-styles';
 import React, { PropsWithChildren } from 'react';
 import { isPropertySignature } from 'typescript';
-import { DeviceSize, useWindowSize } from './App';
+import { DeviceSize, useWindowSize } from './useWindowSize';
 import * as styles from './styles';
 import startup from './images/startup.svg'
 import reporting from './images/reporting.svg'

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as styles from './styles';
-import { DeviceSize, useWindowSize } from './App';
+import { DeviceSize, useWindowSize } from './useWindowSize';
 import Slider from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
 import InputSlider from './InputSlider';
