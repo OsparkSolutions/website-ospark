@@ -59,16 +59,15 @@ function App() {
 
 
     return (
-        <div>
+        <div className={styles.bodyContainer}>
             {windowSize.deviceSize >= DeviceSize.medium && <NavBar isOpen={isOpen} setIsOpen={setIsOpen}></NavBar>}
-            <div className={styles.bodyContainer}>
                 <MainSection />
                 <OurServices />
                 <OurWork />
                 <WorkGrid />
                 <ContactForm isOpen={isOpen} setIsOpen={setIsOpen} />
                 <Footer />
-            </div>
+            
         </div>
     );
 }
