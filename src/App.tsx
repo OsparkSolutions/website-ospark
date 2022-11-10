@@ -18,6 +18,8 @@ import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faLocationDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { DeviceSize, useWindowSize } from './useWindowSize'
+import { WorkGrid } from './WorkGrid';
+import * as styles from './styles'
 
 library.add(fas, faTwitter, faFacebook, faGithub, faLinkedin, faLocationDot, faPhone, faEnvelope)
 
@@ -59,12 +61,14 @@ function App() {
     return (
         <div>
             {windowSize.deviceSize >= DeviceSize.medium && <NavBar isOpen={isOpen} setIsOpen={setIsOpen}></NavBar>}
-        
-            <MainSection />
-            <OurServices />
-            <OurWork />
-            <ContactForm isOpen={isOpen} setIsOpen={setIsOpen} />
-            <Footer />
+            <div className={styles.bodyContainer}>
+                <MainSection />
+                <OurServices />
+                <OurWork />
+                <WorkGrid />
+                <ContactForm isOpen={isOpen} setIsOpen={setIsOpen} />
+                <Footer />
+            </div>
         </div>
     );
 }

@@ -77,23 +77,22 @@ export const ContactForm = (props: ContactFormProps) => {
                 <a href="javascript:void(0)" className={styles.closebtn} onClick={() => props.setIsOpen(false)}>&times;</a>
                 <h1 className = {styles.contactHeading}>Contact Us Today!</h1>
                 <form className={styles.formContainer}>
-                    <label className={styles.labels} htmlFor="firstName">{ firstName ? 'First Name' : <>&nbsp;</>}</label><br></br>
+                    <label className={styles.labels} htmlFor="firstName">{ firstName ? 'First Name' : <>&nbsp;</>}</label>
                     <input placeholder='First Name' className={styles.nameInput} id='firstName' value={firstName} onInput={(ev) => {
                         setFirstName(ev.currentTarget.value)
                     }}></input>
-                    <label className={styles.labels} htmlFor="lastName">{ lastName ? 'Last Name': <>&nbsp;</>}</label><br></br>
+                    <label className={styles.labels} htmlFor="lastName">{ lastName ? 'Last Name': <>&nbsp;</>}</label>
                     <input placeholder='Last Name' className={styles.nameInput} id='lastName' value={lastName} onInput={(ev) => {
                         setLastName(ev.currentTarget.value)
                     }}></input>
 
-                    <label className={styles.labels} htmlFor="email">{ email ? 'Email' : <>&nbsp;</> }</label><br></br>
+                    <label className={styles.labels} htmlFor="email">{ email ? 'Email' : <>&nbsp;</> }</label>
                     <input placeholder="Email" className={styles.emailInput} id='email' value={email} onInput={(ev) => {
                         setEmail(ev.currentTarget.value)
-                    }}></input>
+                    }}></input><br></br>
 
                     {/* <label className={styles.labels} htmlFor="lastName">Select One...</label><br></br> */}
-                    <br></br>
-                    <br></br>
+               
                     <select value={categoryCode} onInput={(ev) => {
                         setCategoryCode(ev.currentTarget.value)
                     }} className={styles.dropDown} name="options" id="options">

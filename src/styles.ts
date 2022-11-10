@@ -2,11 +2,21 @@ import { mergeStyles, mergeStyleSets} from '@fluentui/merge-styles';
 import { findByLabelText } from '@testing-library/react';
 import { NONAME } from 'dns';
 import { readBuilderProgram } from 'typescript';
+import crack2 from './images/crack2.png'
+import crack from './images/crack.jpg'
+console.log('This is crack rock: ' + crack)
 
 export const orange = mergeStyles({color: '#f37322'})
 export const fieldwork = mergeStyles({
     fontFamily: 'fieldwork, sans-serif',
 })
+
+export const bodyContainer = mergeStyles({
+    width: '90%',
+    margin: 'auto',
+    backgroundColor: '#212121'
+})
+
 
 export const logo = mergeStyles(fieldwork, {
     fontSize: '50px', 
@@ -121,7 +131,8 @@ export const sectionHeader = mergeStyles({
     fontFamily: 'fieldwork, sans-serif',
     textAlign: 'center',
     marginBottom:'75px',
-    fontSize: '50px'
+    fontSize: '50px',
+    color: 'white'
 })
 export const largeScreenImageContainer = mergeStyles({
     width: '80%',
@@ -147,6 +158,7 @@ export const subTextContainer = mergeStyles({
 export const servicesParagraph = mergeStyles({
     fontFamily: 'fieldwork, sans-serif',
     lineHeight: '2',
+    color: 'white'
 })
 
 export const mainSectionTitle = mergeStyles({
@@ -154,9 +166,48 @@ export const mainSectionTitle = mergeStyles({
     fontFamily: 'fieldwork, sans-serif'
 })
 
-export const ourWork = mergeStyles({
-    clear: 'both',
+export const ourWorkContainer = mergeStyles({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 })
+
+export const ourWorkHeaderBox = mergeStyles({
+    display: 'flex',
+    color: 'white',
+    position: 'absolute',
+    flexDirection: 'column',
+    width: '60%',
+    margin: 'auto',
+    textAlign: 'center',
+    padding: '30px',
+    border: '10px solid #212121',
+    backgroundColor: 'rgb(0,0,0, 0.5)',
+    'h1,p':{
+        fontFamily: 'fieldwork'
+    },
+
+})
+//Past work image grid
+export const workGridContainer = mergeStyles({
+    display: 'flex',
+    flexWrap: 'wrap'
+})
+export const gridImage = mergeStyles({
+    width: '25%',
+    aspectRatio: '1/1',
+    backgroundImage: `url(${crack})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+})
+export const largeGridImage = mergeStyles({
+    width: '50%',
+    aspectRatio: '1/1'
+})
+
+
+
+
 
 export const openFormStyle = mergeStyles({
     height: '100%',
@@ -188,6 +239,7 @@ export const closebtn = mergeStyles({
     fontSize: '60px',
     color: 'red',
     textDecoration: 'none',
+    marginTop: '30px'
 })
 export const formContainer = mergeStyles({
     display: 'flex',
@@ -200,12 +252,12 @@ export const contactHeading = mergeStyles({
     fontFamily: 'fieldwork, sans-serif',
     textAlign: 'center',
     paddingTop: '20px',
+    marginTop: '100px'
 })
 export const labels = mergeStyles({
     color: 'white',
     fontFamily: 'fieldwork, sans-serif',
     textAlign: 'center',
-    paddingTop: '20px',
 })
 export const nameInput = mergeStyles({
     width: '200px',
@@ -321,7 +373,7 @@ export const footer = mergeStyles({
         fontFamily: 'fieldwork, sans-serif',
         color: '#f37322',
         margin: '0',
-        fontSize: '25px',
+        fontSize: '50px',
         'span': { color: 'black' }
     },
     '& .footerLeft, & .footerCenter, & .footerRight' : {

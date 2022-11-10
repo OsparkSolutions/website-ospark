@@ -8,7 +8,7 @@ export const Footer = () =>{
   return (
     <footer className={styles.footer}>
       <div className='footerLeft'>
-        <p className='footerLogo'>Orange<span>Spark</span></p>
+        <p className='footerLogo'>O<span>Spark</span></p>
         <p className='footerLinks'>
           <a href="#" className="link1">Home</a>
           <a href="#">Blog</a>

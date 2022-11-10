@@ -9,6 +9,8 @@ import * as  THREE from 'three'
 import { renderIntoDocument } from 'react-dom/test-utils';
 import { Color } from 'three';
 import { alpha } from '@mui/material';
+import { useHotkeys } from 'react-hotkeys-hook';
+
 
 
 // import './resources/Three' 
@@ -233,6 +235,7 @@ type Shell = [
 
 const newBaseShell: Shell = [0.25, 0xff7700, 1, 2];
 export const MainSection = () => {
+const parentRef = useRef<HTMLDivElement>(null);
 
 
     //BUTTON TO ADD DEFAULT SHELL
@@ -273,138 +276,8 @@ export const MainSection = () => {
     useSpark(mainRef, Number(rValue), shells, sliderValueX as number, rotation as number, pulseRate as number, translateX as number, translateY as number, numberOfLines as number, backgroundColor as number, alpha as number)
     
     return (
-        <div className={styles.mainBackground}>
-            <button onClick={() => {
-                setIsOpen(!isOpen)
-                console.log(isOpen)
-            }}>Settings</button>
-
-            {/* Parameter Box */}
-            {isOpen && <div className={styles.parameterContainer}>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-
-                    <label htmlFor='rVal'> Universal Radius Scale
-                        <input style={{ width: '60px' }} value={rValue} id='rVal' onInput={(ev) => {
-                            setRValue(ev.currentTarget.value)
-                        }}></input>
-                    </label>
-                    <div style={{width:'200px'}}>
-                        <p>Translate X</p>
-                        <input type='number' value={translateX} onInput={(ev) => {
-                            setTranslateX(Number(ev.currentTarget.value))
-                        }} style={{ width: '40px' }}></input>
-                        <Slider value={translateX} size='small' min={0} max={100} className={styles.slider} onChange={(ev, value) => {
-                            setTranslateX(value as number)
-                        }} />
-                    </div>
-                    <div style={{width:'200px'}}>
-                        <p>Translate Y</p>
-                        <input type='number' value={translateY} onInput={(ev) => {
-                            setTranslateY(Number(ev.currentTarget.value))
-                        }} style={{ width: '40px' }}></input>
-                        <Slider value={translateY} size='small' min={0} max={100} className={styles.slider} onChange={(ev, value) => {
-                            setTranslateY(value as number)
-                        }} />
-                    </div>
-                    <div className={styles.anotherSliderContainer}>
-                        <p>Background Color: </p>
-                        <input type='color' value={'#' + backgroundColor.toString(16)} onChange={(ev) => {
-                            console.log(backgroundColor)
-                            let hexValue = parseInt(ev.currentTarget.value.substring(1), 16)
-                            setBackgroundColor(hexValue)
-                        }}></input>
-                    </div>
-                    <div className={styles.anotherSliderContainer}>
-                        <p>Alpha: </p>
-                        <input className={styles.parameterInput} value={alpha} onInput={(ev) => {
-                            setAlpha(Number(ev.currentTarget.value))
-                        }}></input>
-                    </div>
-                </div>
-                <button onClick={addDefaultShell}>Add shell</button><br />
-                <div className={styles.sliderContainer}>
-                    {shells.map((shell, index) => {
-                        return (
-                            <div className={styles.subSliderContainer}>
-                                <h2>{'Shell: ' + (index + 1)}</h2>
-
-                                <div className={styles.anotherSliderContainer}>
-                                    <p>Scale:</p>
-                                    <input value={shell[0] * 100} onInput={(ev) => {
-                                        shell[0] = Number(ev.currentTarget.value) / 100
-                                        setShells([...shells])
-                                    }} className={styles.parameterInput}></input>
-                                    <Slider size='small' className={styles.slider} onChange={(ev, value) => {
-                                        shell[0] = value as number / 100;
-                                        setShells([...shells])
-                                    }} min={0} max={100} value={shell[0] * 100} />
-                                </div>
-
-                                <div className={styles.anotherSliderContainer}>
-                                    <p>Opacity:</p>
-                                    <input className={styles.parameterInput} value={shell[2] * 100} onInput={(ev) => {
-                                        shell[2] = Number(ev.currentTarget.value) / 100
-                                        setShells([...shells])
-                                    }}></input>
-                                    <Slider size='small' className={styles.slider} onChange={(ev, value) => {
-                                        shell[2] = value as number / 100;
-                                        setShells([...shells])
-                                    }} min={0} max={100} value={shell[2] * 100} />
-                                </div>
-
-                                <div className={styles.anotherSliderContainer}>
-                                    <p>Rev Speed</p>
-                                    <input type='number' value={rotation} onInput={(ev) => {
-                                        setRotation(Number(ev.currentTarget.value))
-                                    }} className={styles.parameterInput}></input>
-                                    <Slider size='small' className={styles.slider} value={rotation} onChange={(ev, value) => {
-                                        setRotation(value as number)
-                                    }} min={0} max={20} />
-                                </div>
-
-                                <div className={styles.anotherSliderContainer}>
-                                    <p>Pulse Rate:</p>
-                                    <input type='number' value={pulseRate} onInput={(ev) => {
-                                        setPulseRate(Number(ev.currentTarget.value))
-                                    }} className={styles.parameterInput}></input>
-                                    <Slider value={pulseRate} size='small' min={0} max={100} className={styles.slider} onChange={(ev, value) => {
-                                        setPulseRate(value as number)
-                                    }} />
-                                </div>
-
-                                <div className={styles.anotherSliderContainer}>
-                                    <p>Vectors</p>
-                                    <input type='number' value={numberOfLines} onInput={(ev) => {
-                                        setNumberOfLines(Number(ev.currentTarget.value))
-                                    }} className={styles.parameterInput}></input>
-                                    <Slider value={numberOfLines} size='small' min={0} max={4000} className={styles.slider} onChange={(ev, value) => {
-                                        setNumberOfLines(value as number)
-                                    }} />
-                                </div>
-
-
-                                <div className={styles.anotherSliderContainer}>
-                                    <p>Color: </p>
-                                    <input type='color' value={'#' + shell[1].toString(16)} onChange={(ev) => {
-                                        let hexValue = parseInt(ev.currentTarget.value.substring(1), 16)
-                                        shell[1] = Number(hexValue)
-                                        setShells([...shells])
-                                    }}></input>
-                                </div>
-
-                                {/* Delete Shell */}
-                                <a style={{cursor: 'pointer'}} onClick={()=>{
-                                    removeShell(index);
-                                }}>&#10006;</a>
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>}
-            End Parameter Box
-
-            <div className={styles.dynamicSpark} ref={mainRef}></div>
-
+        <div ref={parentRef} className={styles.mainBackground}>
+            {/* <Spark parentElementRef={parentRef} scale={1000} pulseRate={10}/> */}
             {/* Start of main section */}
             <div className={styles.mainSection}>
                 <p className={styles.mainParagraph}> Orange Spark Solutions, LLC is a <span className={styles.orangeText}>technology solutions</span> provider. We work with <span className={styles.blueText}>Startups, Small</span> & <span className={styles.blueText}>Mid-sized</span> businesses on <span className={styles.orangeText}>specialized projects</span> or as a <span className={styles.orangeText}>full-service technology partner</span>. We work closely with you to provide <span className={styles.blueText}>efficient, scalable, right-sized</span> technology solutions at <span className={styles.orangeText}>reasonable costs</span>.</p>

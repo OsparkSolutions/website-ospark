@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { runAsync } from './helper';
 import * as styles from './styles';
+import crack2 from './images/crack2.png'
 
 export const OurWork = () => {
   const aRef = useRef<HTMLInputElement>(null)
@@ -9,8 +10,17 @@ export const OurWork = () => {
   
 
     return (
-      <div>
-        
+      <div className={styles.ourWorkContainer}>
+        <img src={crack2} style={{width: '100%',}}></img>
+        <div className={styles.ourWorkHeaderBox}>
+          <h1>OUR WORK</h1>
+          <p>We will ask your needs, brainstorm the solution and create a project timeline by identifying benchmarks for the weeks to come. </p>
+          <a>
+            <div>
+              See Our Work
+            </div>
+          </a>
+        </div>
       </div>
       
     )
