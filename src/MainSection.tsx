@@ -252,6 +252,32 @@ const parentRef = useRef<HTMLDivElement>(null);
     const [alpha, setAlpha] = useState<number>(0)
 
 
+    useEffect(()=>{
+        console.log(parentRef.current)
+        if(parentRef.current !== null && parentRef.current !== undefined){
+            parentRef.current.addEventListener('dragstart', drag_start, false)
+            document.body.addEventListener('dragover', drag_over, false)
+            document.body.addEventListener('drop', drop, false);
+        }
+    })
+    const drag_start = (event: any) => {
+        const style = window.getComputedStyle(event.target, null)
+    }
+    const drag_over = (event: any) => {
+        event.preventDefault();
+        return false;
+    }
+    const drop = (event: any) => {
+        var offset = event.dataTransfer.getData("text/plain").split(',');
+        var dm = document.getElementById('dragme');
+        dm!.style.left = (event.clientX + parseInt(offset[0], 10)) + 'px';
+        dm!.style.top = (event.clientY + parseInt(offset[1], 10)) + 'px';
+        event.preventDefault();
+        return false;
+        console.log('i dropped that bitch')
+    }
+
+
     const addDefaultShell = () => {
         setShells((existingShells) => [...existingShells, [...newBaseShell]]);
         console.log(shells.length)
@@ -276,8 +302,10 @@ const parentRef = useRef<HTMLDivElement>(null);
     useSpark(mainRef, Number(rValue), shells, sliderValueX as number, rotation as number, pulseRate as number, translateX as number, translateY as number, numberOfLines as number, backgroundColor as number, alpha as number)
     
     return (
-        <div ref={parentRef} className={styles.mainBackground}>
-            {/* <Spark parentElementRef={parentRef} scale={1000} pulseRate={10}/> */}
+        <div id='dragme' draggable={true} ref={parentRef} className={styles.mainBackground}>
+
+            <Spark parentElementRef={parentRef} scale={1000} pulseRate={10} />
+
             {/* Start of main section */}
             <div className={styles.mainSection}>
                 <p className={styles.mainParagraph}> Orange Spark Solutions, LLC is a <span className={styles.orangeText}>technology solutions</span> provider. We work with <span className={styles.blueText}>Startups, Small</span> & <span className={styles.blueText}>Mid-sized</span> businesses on <span className={styles.orangeText}>specialized projects</span> or as a <span className={styles.orangeText}>full-service technology partner</span>. We work closely with you to provide <span className={styles.blueText}>efficient, scalable, right-sized</span> technology solutions at <span className={styles.orangeText}>reasonable costs</span>.</p>

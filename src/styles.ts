@@ -4,7 +4,7 @@ import { NONAME } from 'dns';
 import { readBuilderProgram } from 'typescript';
 import crack2 from './images/crack2.png'
 import crack from './images/crack.jpg'
-console.log('This is crack rock: ' + crack)
+import waymark from './images/waymark.jpg'
 
 export const orange = mergeStyles({color: '#f37322'})
 export const fieldwork = mergeStyles({
@@ -14,7 +14,9 @@ export const fieldwork = mergeStyles({
 export const bodyContainer = mergeStyles({
     width: '90%',
     margin: 'auto',
-    backgroundColor: '#212121'
+    backgroundColor: '#212121',
+    boxShadow: '0px 2px 20px 5px #A09C9B',
+
 })
 
 
@@ -39,7 +41,7 @@ export const navBarButtons = mergeStyles({
 
 export const header = mergeStyles({
     position: 'fixed',
-    width: '100%',
+    width: 'inherit',
     backgroundColor: 'rgba(0,0,0,0.1)',
     //blurs nav bar
     backdropFilter: 'blur(8px)',
@@ -144,6 +146,8 @@ export const smallScreenImageContainer = mergeStyles({
     alignItems: 'center', 
     flexDirection:'column',
     marginBottom: '200px',
+    marginLeft: '20px',
+    marginRight: '20px',
 })
 export const leftLargeImage = mergeStyles({
     float: 'left',
@@ -193,13 +197,19 @@ export const workGridContainer = mergeStyles({
     display: 'flex',
     flexWrap: 'wrap'
 })
-export const gridImage = mergeStyles({
+export const gridImageTemplate = mergeStyles({
     width: '25%',
     aspectRatio: '1/1',
-    backgroundImage: `url(${crack})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center'
 })
+export const wayMarkGridImage = mergeStyles([gridImageTemplate, {
+    backgroundImage: `url(${waymark})`
+}])
+export const sportfolioGridImage = mergeStyles([gridImageTemplate, {
+    backgroundImage: `url(${crack})`
+}])
+
 export const largeGridImage = mergeStyles({
     width: '50%',
     aspectRatio: '1/1'

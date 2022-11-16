@@ -38,7 +38,7 @@ const OurServicesComponent = (props: PropsWithChildren<OurServicesComponent>) =>
 
     let imageClass = windowSize.deviceSize <= DeviceSize.medium ? styles.largeScreenImageContainer : mergeStyles({width: '30%', display:'flex',alignItems: 'center', flexDirection:'column'});
     let textClass = windowSize.deviceSize <= DeviceSize.medium ? styles.mainSectionTitle : mergeStyles({fontFamily: 'fieldwork, sans-serif', color: 'white'});
-    let containerClass = windowSize.deviceSize <= DeviceSize.medium ? styles.smallScreenImageContainer : mergeStyles({clear: 'both', marginBottom: '300px', display:'flex', flexDirection: 'row', alignItems:'center'})
+    let containerClass = windowSize.deviceSize <= DeviceSize.medium ? styles.smallScreenImageContainer : mergeStyles({clear: 'both', marginBottom: '300px', display:'flex', flexDirection: 'row', alignItems:'center', marginLeft:'20px', marginRight:'20px'})
     return(
         <div className = {containerClass}>
             {!props.isImageRight && <img className={imageClass} src={props.uri} />}

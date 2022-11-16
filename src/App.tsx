@@ -1,5 +1,4 @@
 import React from 'react';
-import {Example} from './BurgerBar'
 import { NavBar } from './NavBar';
 import { MainSection } from './MainSection';
 import { OurServices } from './OurServices';
