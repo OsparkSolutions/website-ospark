@@ -34,8 +34,6 @@ function App() {
 
     const windowSize = useWindowSize();
     useEffect(() => {
-        console.log(`${windowSize.width} x ${windowSize.height}, device size: ${windowSize.deviceSize}`)
-
         return () => {
             //console.log('i am cleaning up!' + windowSize.width);
         }
