@@ -19,6 +19,7 @@ import { faLocationDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-
 import { DeviceSize, useWindowSize } from './useWindowSize'
 import { WorkGrid } from './WorkGrid';
 import * as styles from './styles'
+import { Spark } from './tempSpark_v2';
 
 library.add(fas, faTwitter, faFacebook, faGithub, faLinkedin, faLocationDot, faPhone, faEnvelope)
 

@@ -60,6 +60,8 @@ export const dynamicSpark = mergeStyles({
     width: '100%',
 })
 export const mainBackground = mergeStyles({
+    height: '100%',
+    width: '100%',
     backgroundColor: 'white',
     marginBottom: '200px',
     paddingTop: '60.667px',

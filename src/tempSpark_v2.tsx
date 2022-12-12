@@ -113,7 +113,6 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, settings: Settings) 
         lines.splice(0, lines.length);
         scales.splice(0, scales.length);
         scene.clear()
-        console.log('i cleared out')
         for (let i = 0; i < shells.length; ++i) {
             var line: any, material, shell;
 
@@ -156,7 +155,7 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, settings: Settings) 
         function loop() {
             camera.updateMatrix()
             renderer?.render(scene, camera);
-            var time = new Date().getTime() * 0.0001;
+            var time = new Date().getTime() * 0.0001;            
 
             for (var i = 0; i < lines.length; i++) {
                 //Rotation controller
@@ -175,7 +174,7 @@ const useSpark = (mainRef: React.RefObject<HTMLDivElement>, settings: Settings) 
             clearInterval(interval);
         }
         return cleanUp;
-    }, [settings.rValue, settings.elementWidth, settings.elementHeight, settings.shells, settings.sliderValueX, settings.rotation, settings.pulseRate, settings.translateX, settings.translateY, settings.numberOfLines, settings.backgroundColor, settings.alpha])
+    }, [lines])
 }
 
 type Shell = [
@@ -198,6 +197,7 @@ interface Spark {
 
 export const Spark = (props: Spark) => {
     const windowSize = useWindowSize();
+    const mainRef = useRef<HTMLDivElement>(null);
 
     //BUTTON TO ADD DEFAULT SHELL
     const [rValue, setRValue] = useState<number>(props.scale);
@@ -213,13 +213,97 @@ export const Spark = (props: Spark) => {
     const [alpha, setAlpha] = useState<number>(0)
     const [elementHeight, setElementHeight] = useState(props.height)
     const [elementWidth, setElementWidth] = useState(props.width)
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const positionHistory = useRef<number[][]>([[0,0]]);
+    const [isMoving, setIsMoving] = useState(true)
+
 
     useHotkeys('ctrl+i', () => setIsOpen(!isOpen), [isOpen])
-
     //Mouse drag function
+    // useEffect(() => {
+    //     const handleMouseMove = (event: MouseEvent) => {
+    //         // Update the state with the current mouse position
+    //         const rect = mainRef.current?.getBoundingClientRect();
+    //         if(rect) {
+    //             setMousePosition({ x: event.clientX - rect.left, y: event.clientY - rect.top });
+    //             setTranslateX((mousePosition.x * 100) / props.parentElementRef.current?.clientWidth!)
+    //             setTranslateY(mousePosition.y * 100 / props.parentElementRef.current?.clientHeight!)
+    //             if (positionHistory.current && (positionHistory.current[positionHistory.current.length - 1][0] !== translateX || positionHistory.current[positionHistory.current.length - 1][1] !== translateY)) {
+    //                 positionHistory.current.push([translateX, translateY])
+    //             }
+    //         }
+    //     };
+    //     const mouse_click = (event: any) => {
+    //         setIsMoving(!isMoving)
+    //         console.log(isMoving)
+    //         if(isMoving){
+    //             console.log('mounting')
+    //             mainRef.current?.addEventListener('mousemove', handleMouseMove);
+    //         }
+    //         else{
+    //             console.log('unmounting')
+    //             // mainRef.current?.removeEventListener('mousemove', handleMouseMove);
+    
+    //         }
+    //         const style = window.getComputedStyle(event.target, null)
+    //     }
+    //     const mouse_up = (event: any) => {
+            
+    //         event.preventDefault();
+    //         return false;
+    //     }
+    //     document.body.addEventListener('mouseup', mouse_up, false);
+    //     // Attach the event listener to the div element
+    //     if (mainRef.current) {
+    //         console.log('reached adding listener')
+    //         mainRef.current.addEventListener('click', mouse_click, false)
+
+    //     }
+    //     // This cleanup function will run when the component is unmounted
+    //     return () => {
+    //         // Remove the event listener when the component is unmounted
+    //         mainRef.current?.removeEventListener('mousemove', handleMouseMove);
+    //     };
+    // }, [mousePosition, isMoving]);
+
+    useEffect(() =>{
+        console.log(isMoving)
+        const handleMouseMove = (event: MouseEvent) => {
+                    // Update the state with the current mouse position
+                    const rect = mainRef.current?.getBoundingClientRect();
+                    if(rect) {
+                        console.log(isMoving)
+                        console.log('inside the handler move')
+                        setMousePosition({ x: event.clientX - rect.left, y: event.clientY - rect.top });
+                        setTranslateX((mousePosition.x * 100) / props.parentElementRef.current?.clientWidth!)
+                        setTranslateY(mousePosition.y * 100 / props.parentElementRef.current?.clientHeight!)
+                        if (positionHistory.current && (positionHistory.current[positionHistory.current.length - 1][0] !== translateX || positionHistory.current[positionHistory.current.length - 1][1] !== translateY)) 
+                            positionHistory.current.push([translateX, translateY])
+                        
+                    }
+                };
+        const mouse_click = () => {
+            if(isMoving && mainRef.current){
+                mainRef.current.removeEventListener('mousemove', handleMouseMove)
+            }
+            else{
+                mainRef.current?.addEventListener('mousemove', handleMouseMove)
+            }
+            setIsMoving(!isMoving)
+        }
+        if(mainRef.current){
+            mainRef.current.addEventListener('click', mouse_click)
+
+        }
+        return () => {
+                    // Remove the event listener when the component is unmounted
+                    mainRef.current?.removeEventListener('click', mouse_click); 
+                };
+    },[isMoving])
+
+
 
     //End of mouse drag functions
-
     useEffect(() => {
         const resizeObserver = new ResizeObserver((entry) => {
             let count = 0;
@@ -230,9 +314,9 @@ export const Spark = (props: Spark) => {
         if (props.parentElementRef.current) {
             resizeObserver.observe(props.parentElementRef.current)
 
-            props.parentElementRef.current.onmousedown = (event: any) =>{
-                //set translate hooks here
-            }   
+            // props.parentElementRef.current.onmousedown = (event: any) => {
+            //     //set translate hooks here
+            // }
             // props.parentElementRef.current.addEventListener('mousedown', mouse_down, false)
             // document.body.addEventListener('mousemove', mouse_move, false)
             // document.body.addEventListener('mouseup', mouse_up, false);
@@ -246,31 +330,11 @@ export const Spark = (props: Spark) => {
         return cleanUpResizeListener;
     }, [elementHeight, elementWidth])
 
+
+
     
+
     
-    const mouse_down = (event: any) => {
-        console.log(props.parentElementRef.current?.clientHeight)
-        const style = window.getComputedStyle(event.target, null)
-    }
-    const mouse_move = (event: any) => {
-        // setTranslateX((event.clientX*100)/windowSize.width)
-        setTranslateX((event.clientX * 100) / props.parentElementRef.current?.clientWidth!)
-        setTranslateY(event.clientY * 100 / props.parentElementRef.current?.clientHeight!)
-        event.preventDefault();
-        return false;
-    }
-    const mouse_up = (event: any) => {
-        console.log('mouse up')
-        // var offset = event.dataTransfer.getData("text/plain").split(',');
-        // var dm = document.getElementById('dragme');
-        // dm!.style.left = (event.clientX + parseInt(offset[0], 10)) + 'px';
-        // dm!.style.top = (event.clientY + parseInt(offset[1], 10)) + 'px';
-        event.preventDefault();
-        return false;
-    }
-    props.parentElementRef.current?.addEventListener('mousedown', mouse_down, false)
-    document.body.addEventListener('mousemove', mouse_move, false)
-    document.body.addEventListener('mouseup', mouse_up, false);
 
 
 
@@ -293,7 +357,6 @@ export const Spark = (props: Spark) => {
     //     console.log(shells)
     // }
 
-    const mainRef = useRef<HTMLDivElement>(null);
 
     useSpark(mainRef,
         {
