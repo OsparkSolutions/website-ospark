@@ -29,7 +29,7 @@
     "react-dom": "^18.2.0",
     "react-hotkeys-hook": "^4.0.2",
     "react-scripts": "5.0.1",
-    "spark_app_v2": "file:../spark_app_v2/spark_app_v2-1.5.9.tgz",
+    "spark_app_v2": "file:../spark_app_v2/spark_app_v2-1.6.1.tgz",
     "three": "^0.145.0",
     "toolkit": "file:../toolkit",
     "typescript": "^4.8.2",
@@ -40,7 +40,7 @@
     "build": "npx react-scripts build",
     "test": "npx react-scripts test",
     "eject": "npx react-scripts eject",
-    "update": "tsc -p \"C:\\Users\\Evan Ryan\\Documents\\Project Folder\\spark_app_v2\\tsconfig.json\" && npm run pack --prefix \"C:\\Users\\Evan Ryan\\Documents\\Project Folder\\spark_app_v2\" && npm uninstall spark_app_v2 && npm install \"C:\\Users\\Evan Ryan\\Documents\\Project Folder\\spark_app_v2\\spark_app_v2-1.5.9.tgz\""
+    "update": "tsc -p \"C:\\Users\\Evan Ryan\\Documents\\Project Folder\\spark_app_v2\\tsconfig.json\" && npm run pack --prefix \"C:\\Users\\Evan Ryan\\Documents\\Project Folder\\spark_app_v2\" && npm uninstall spark_app_v2 && npm install \"C:\\Users\\Evan Ryan\\Documents\\Project Folder\\spark_app_v2\\spark_app_v2-1.6.1.tgz\""
   },
   "eslintConfig": {
     "extends": [

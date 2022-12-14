@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Spark } from './tempSpark_v2'
+import { Spark } from 'spark_app_v2'
 import * as styles from './styles';
 import { DeviceSize, useWindowSize } from './useWindowSize';
 import Slider from '@mui/material/Slider';
