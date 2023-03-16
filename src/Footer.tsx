@@ -1,8 +1,8 @@
 import React from 'react';
 import * as styles from './styles'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faFacebook, faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+// import { faEnvelope, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 export const Footer = () =>{
   return (
@@ -21,15 +21,15 @@ export const Footer = () =>{
       </div>
       <div className='footerCenter'>
         <div>
-          <i className="fa fa-map-marker"><FontAwesomeIcon icon={faLocationDot} /></i>
+          {/* <i className="fa fa-map-marker"><FontAwesomeIcon icon={faLocationDot} /></i> */}
           <p><span>Washington, DC</span></p>
         </div>
         <div>
-          <i className="fa fa-phone"><FontAwesomeIcon icon={faPhone} /></i>
+          {/* <i className="fa fa-phone"><FontAwesomeIcon icon={faPhone} /></i> */}
           <p>+1.555.555.5555</p>
         </div>
         <div>
-          <i className='faEnvelope'><FontAwesomeIcon icon={faEnvelope} /></i>
+          {/* <i className='faEnvelope'><FontAwesomeIcon icon={faEnvelope} /></i> */}
           <p><a href="mailto:support@company.com">help@ospark.com</a></p>
         </div>
       </div>
@@ -40,10 +40,10 @@ export const Footer = () =>{
           Orange Spark Solutions, LLC is small, full-service IT, Web & Development Solution provider based out of Washington, DC. We focus on web design, mobile/web/database development and cloud centric infrastructure solutions.
         </p>
         <div className='footerIcons'>
-          <a href="#"><FontAwesomeIcon icon={faFacebook} /></a>
+          {/* <a href="#"><FontAwesomeIcon icon={faFacebook} /></a>
           <a href="#"><FontAwesomeIcon icon={faTwitter} /></a>
           <a href="#"><FontAwesomeIcon icon={faLinkedin} /></a>
-          <a href="#"><FontAwesomeIcon icon={faGithub} /></a>
+          <a href="#"><FontAwesomeIcon icon={faGithub} /></a> */}
         </div>
       </div>
     </footer>

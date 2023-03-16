@@ -1,4 +1,4 @@
-import { mergeStyles, mergeStyleSets} from '@fluentui/merge-styles';
+import { IStyle, mergeStyles, mergeStyleSets } from '@fluentui/merge-styles';
 import { findByLabelText } from '@testing-library/react';
 import { NONAME } from 'dns';
 import { readBuilderProgram } from 'typescript';
@@ -6,35 +6,41 @@ import crack2 from './images/crack2.png'
 import crack from './images/crack.jpg'
 import waymark from './images/waymark.jpg'
 
-export const orange = mergeStyles({color: '#f37322'})
+export const orange = mergeStyles({ color: '#f37322' })
 export const fieldwork = mergeStyles({
     fontFamily: 'fieldwork, sans-serif',
 })
 
-export const bodyContainer = mergeStyles({
+export const widthConstrained = mergeStyles({
+    position: "relative",
     width: '90%',
-    margin: 'auto',
-    backgroundColor: '#212121',
-    boxShadow: '0px 2px 20px 5px #A09C9B',
-
+    margin: 'auto'
 })
 
 
+export const bodyContainer = mergeStyles({
+    position: "relative",
+    width: '90%',
+    margin: 'auto',
+    //backgroundColor: '#212121',
+    //    boxShadow: '0px 2px 20px 5px #A09C9B',
+})
+
 export const logo = mergeStyles(fieldwork, {
-    fontSize: '50px', 
+    fontSize: '50px',
     color: '#f37322',
     cursor: 'pointer',
     textDecoration: 'none',
-    'span': {color: 'black'},
+    'span': { color: 'black' },
 });
 
 export const navBarButtons = mergeStyles({
     display: 'flex',
     marginLeft: 'auto',
     /** .navBar a{} **/
-    'a':[fieldwork, {textDecoration: 'none', fontSize: '20px', color: '#f37322', paddingLeft: '20px', paddingRight: '20px', height: '100%', fontWeight: '300'}],
+    'a': [fieldwork, { textDecoration: 'none', fontSize: '20px', color: '#f37322', paddingLeft: '20px', paddingRight: '20px', height: '100%', fontWeight: '300' }],
     alignItems: 'center',
-    'a:hover':{
+    'a:hover': {
         backgroundColor: 'gray'
     }
 });
@@ -60,16 +66,16 @@ export const dynamicSpark = mergeStyles({
     width: '100%',
 })
 export const mainBackground = mergeStyles({
-    height: '100%',
+    alignItems: "center",
+    flexDirection: "row",
+    display: "flex",
+    height: '100vh',
     width: '100%',
-    backgroundColor: 'white',
-    marginBottom: '200px',
-    paddingTop: '60.667px',
     position: 'relative',
 })
 
 export const mainSection = mergeStyles({
-    margin: 'auto',
+
     width: '75%',
     paddingTop: '150px',
     paddingBottom: '0px',
@@ -79,13 +85,13 @@ export const mainSection = mergeStyles({
     flexDirection: 'column',
     textAlign: 'center',
     alignItems: 'center',
-    'p':[{justifyContent: 'center', textAlign: 'center'}, [fieldwork]],
+    'p': [{ justifyContent: 'center', textAlign: 'center' }, [fieldwork]],
 })
 //Three.js parameters
 export const parameterContainer = mergeStyles({
     padding: '20px',
     backgroundColor: '#DEDEDE',
-    borderStyle: 'solid',  
+    borderStyle: 'solid',
 })
 export const sliderContainer = mergeStyles({
     width: '100%',
@@ -102,14 +108,14 @@ export const subSliderContainer = mergeStyles({
     padding: '10px',
     borderRadius: '10px',
     justifyContent: 'space-between'
-    
+
 })
 export const anotherSliderContainer = mergeStyles({
     width: '150px',
     border: '2px solid black'
 })
 export const slider = mergeStyles({
-    
+
 })
 export const parameterInput = mergeStyles({
     width: '75px'
@@ -134,9 +140,9 @@ export const slogan = mergeStyles({
 export const sectionHeader = mergeStyles({
     fontFamily: 'fieldwork, sans-serif',
     textAlign: 'center',
-    marginBottom:'75px',
+    marginBottom: '75px',
     fontSize: '50px',
-    color: 'white'
+    color: '#212121'
 })
 export const largeScreenImageContainer = mergeStyles({
     width: '80%',
@@ -144,9 +150,9 @@ export const largeScreenImageContainer = mergeStyles({
     flexDirection: 'row'
 })
 export const smallScreenImageContainer = mergeStyles({
-    display:'flex',
-    alignItems: 'center', 
-    flexDirection:'column',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
     marginBottom: '200px',
     marginLeft: '20px',
     marginRight: '20px',
@@ -154,9 +160,9 @@ export const smallScreenImageContainer = mergeStyles({
 export const leftLargeImage = mergeStyles({
     float: 'left',
     width: '30%',
-    display:'flex',
-    alignItems: 'center', 
-    flexDirection:'column',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
 })
 export const subTextContainer = mergeStyles({
     marginLeft: '50px'
@@ -189,7 +195,7 @@ export const ourWorkHeaderBox = mergeStyles({
     padding: '30px',
     border: '10px solid #212121',
     backgroundColor: 'rgb(0,0,0, 0.5)',
-    'h1,p':{
+    'h1,p': {
         fontFamily: 'fieldwork'
     },
 
@@ -300,7 +306,7 @@ export const messageInput = mergeStyles({
     borderStyle: 'solid',
     justifySelf: 'center',
     margin: 'auto',
-    resize: 'vertical' 
+    resize: 'vertical'
 })
 export const submit = mergeStyles({
     width: '100px',
@@ -373,7 +379,7 @@ const footerMediaSettings = {
 export const footer = mergeStyles({
     background: '#666',
     backgroundColor: 'gray',
-    clear: 'both',  
+    clear: 'both',
     width: '100%',
     fontWeight: '600',
     fontFamily: 'fieldwork-hum, sans-serif',
@@ -381,34 +387,34 @@ export const footer = mergeStyles({
     boxShadow: '0 1px 1px 0 rgba(0, 0, 0, 0.12)',
     padding: '55px 50px',
 
-    '& .footerLogo':{
+    '& .footerLogo': {
         fontFamily: 'fieldwork, sans-serif',
         color: '#f37322',
         margin: '0',
         fontSize: '50px',
         'span': { color: 'black' }
     },
-    '& .footerLeft, & .footerCenter, & .footerRight' : {
+    '& .footerLeft, & .footerCenter, & .footerRight': {
         display: 'inline-block',
         verticalAlign: 'top',
     },
-    '& .footerLeft' : {
+    '& .footerLeft': {
         width: '40%',
     },
     '& .footerLinks': {
         color: '#ffffff',
         margin: '20px 0 12px',
         padding: '0',
-        'a':{
+        'a': {
             display: 'inline-block',
             lineHeight: '1.8',
             fontWeight: '400',
             textDecoration: 'none',
-            color:  'inherit',
+            color: 'inherit',
         }
     },
     '& .footerCompanyName': {
-        color:  '#222',
+        color: '#222',
         fontSize: '14px',
         fontWeight: 'normal',
         margin: '0',
@@ -434,61 +440,61 @@ export const footer = mergeStyles({
         lineHeight: '38px',
     },
     '& .footerCenter p': {
-      display: 'inline-block',
-      color: '#ffffff',
-      fontWeight: '400',
-      verticalAlign: 'middle',
-      margin: '0',
+        display: 'inline-block',
+        color: '#ffffff',
+        fontWeight: '400',
+        verticalAlign: 'middle',
+        margin: '0',
     },
-    '& .footerCenter p span':{
-      display: 'block',
-      fontWeight: 'normal',
-      fontSize: '16px',
-      lineHeight: '2',
+    '& .footerCenter p span': {
+        display: 'block',
+        fontWeight: 'normal',
+        fontSize: '16px',
+        lineHeight: '2',
     },
     '& .footerCenter p a': {
         color: '#f37322',
         textDecoration: 'none',
     },
     '& .footerLinks a:before': {
-      content: "' |'",
-      whiteSpace: 'pre',
-      fontWeight:'300',
-      fontSize: '20px',
-      left: '0',
-      color: '#fff',
-      display: 'inline-block',
-      paddingRight: '5px',
+        content: "' |'",
+        whiteSpace: 'pre',
+        fontWeight: '300',
+        fontSize: '20px',
+        left: '0',
+        color: '#fff',
+        display: 'inline-block',
+        paddingRight: '5px',
     },
     '& .footerLinks .link1:before': {
         content: 'none',
     },
-    '& .footerRight':{
+    '& .footerRight': {
         width: '20%',
     },
-    '& .companyAbout':{
+    '& .companyAbout': {
         lineHeight: '20px',
         color: '#92999f',
         fontSize: '13px',
         fontWeight: 'normal',
         margin: '0',
     },
-    '& .companyAbout span':{
+    '& .companyAbout span': {
         display: 'block',
         color: '#ffffff',
         fontSize: '14px',
         fontWeight: 'bold',
         marginBottom: '20px',
     },
-    '& .footerIcons':{
+    '& .footerIcons': {
         marginTop: '25px'
     },
-    '& .footerIcons a':{
+    '& .footerIcons a': {
         display: 'inline-block',
         width: '35px',
         height: '35px',
         cursor: 'pointer',
-        backgroundColor:  '#33383b',
+        backgroundColor: '#33383b',
         borderRadius: '2px',
 
         fontSize: '20px',
@@ -499,13 +505,13 @@ export const footer = mergeStyles({
         marginRight: '3px',
         marginBottom: '5px',
     },
-    '& .footerIcons a i::before':{
-        
+    '& .footerIcons a i::before': {
+
     },
 
     '@media (max-width: 1000px)': {
         font: 'bold 12px sans serif',
-        color:"blue",
+        color: "blue",
         '.footerLeft': footerMediaSettings,
         '.footerCenter': footerMediaSettings,
         '.footerRight': footerMediaSettings,
@@ -515,4 +521,63 @@ export const footer = mergeStyles({
     }
 })
 
+
+export const flexCenter = mergeStyles({
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center"
+})
+
+
+export const innerShadow = mergeStyles({
+    boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
+})
+
+export const innerShadowSmall = mergeStyles({
+    //boxShadow: "rgba(50, 50, 93, 0.25) 0px 15px 30px -6px inset, rgba(0, 0, 0, 0.3) 0px 9px 18px -9px inset",
+    boxShadow: "rgba(50, 50, 93, 0.25) 0px 10px 20px -3px inset, rgba(0, 0, 0, 0.3) 0px 6px 12px -6px inset",
+    //boxShadow: "rgba(50, 50, 93, 0.25) 0px 5px 10px -2px inset, rgba(0, 0, 0, 0.3) 0px 3px 6px -3px inset"
+})
+
+
+export const boxedShadow = mergeStyles({
+    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
+})
+
+
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+
+
+/* This container is needed to position the front and back side */
+export const cardFlip = mergeStyleSets({
+    flipCard: {
+        //backgroundColor: transparent;
+        //width: 300px;
+        //height: 200px;
+        //border: 1px solid #f1f1f1;
+        perspective: "1000px", /* Remove this if you don't want the 3D effect */
+        ":hover>*": {
+            transform: "rotateY(180deg)"
+        }
+    },
+    flipCardInner: {
+        position: "relative",
+        width: "100%",
+        height: "100%",
+        textAlign: "center",
+        transition: "transform 0.8s",
+        transformStyle: "preserve-3d",
+        ">*": {
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            backfaceVisibility: "hidden"
+        }
+    },
+    flipCardBack: {
+        transform: "rotateY(180deg)"
+    }
+})
 
