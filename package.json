@@ -27,7 +27,6 @@
     "spark_app_v2": "file:../spark_app_v2",
     "three": "^0.145.0",
     "three.quarks": "^0.8.8",
-    "toolkit": "file:../toolkit",
     "typescript": "^4.4.4",
     "web-vitals": "^2.1.4"
   },
