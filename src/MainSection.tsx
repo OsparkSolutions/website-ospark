@@ -1,11 +1,32 @@
 import { mergeStyles } from '@fluentui/merge-styles';
 import * as styles from './styles';
+import { Shell, Spark } from 'spark_app_v2';
+import { useRef, useState } from 'react';
 
 export const MainSection = () => {
 
+    const parentRef = useRef<HTMLDivElement>(null)
+
+    const [myShells, setShells] = useState<Shell[]>([
+        // [1, 0xff7700, 1, 2],
+        // [1, 0xff7700, 1, 2]
+        [0.69, 0xff7700, 1, 2],
+        [1.5, 0xff7700, 1, 2]]
+    )
+
     return (
-        <div className={mergeStyles(styles.widthConstrained, {
+        <div id='main hoe'  ref={parentRef} className={mergeStyles(styles.widthConstrained, {
         })}>
+            <Spark parentElementRef={parentRef} defaults={{
+                    numberOfLines: 500,
+                    pulseRate: 20,
+                    rotation: 2,
+                    scale: 10,
+                    translateX: -446,
+                    translateXPx: true,
+                    translateY: 48.5
+                }} shells={myShells} width={parentRef.current?.clientWidth} height={parentRef.current?.clientHeight}/>
+
             <div className={mergeStyles(
                 styles.innerShadow,
                 {

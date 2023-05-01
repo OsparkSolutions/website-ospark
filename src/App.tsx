@@ -23,7 +23,8 @@ import { Shell, Spark } from 'spark_app_v2';
 import { mergeStyles } from '@fluentui/merge-styles';
 import 'animate.css'
 //library.add(fas, faTwitter, faFacebook, faGithub, faLinkedin, faLocationDot, faPhone, faEnvelope)
-
+import { initializeIcons } from '@fluentui/font-icons-mdl2';
+initializeIcons()
 export interface ContactFormProps {
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -55,31 +56,16 @@ function App() {
         previousScrollPosition.current = window.scrollY
     });
 
-    const parentRef = useRef<HTMLDivElement>(null)
 
-    const [myShells, setShells] = useState<Shell[]>([
-        // [1, 0xff7700, 1, 2],
-        // [1, 0xff7700, 1, 2]
-        [0.69, 0xff7700, 1, 2],
-        [1.5, 0xff7700, 1, 2]]
-
-    )
+ 
         
     return (
         <>
-            <div ref={parentRef} className={mergeStyles({
+            <div className={mergeStyles({
                 width: "100%",
                 backgroundColor: "white"
             })}>
-                <Spark parentElementRef={parentRef} defaults={{
-                    numberOfLines: 500,
-                    pulseRate: 20,
-                    rotation: 2,
-                    scale: 10,
-                    translateX: -446,
-                    translateXPx: true,
-                    translateY: 48.5
-                }} shells={myShells} />
+                
                 <MainSection />
             </div>
             <div className={mergeStyles(styles.fieldwork, {
@@ -136,11 +122,11 @@ const SiteSection = (props: PropsWithChildren<{ title: string }>) => {
         <h1 className={mergeStyles(styles.sectionHeader, {
             backgroundColor: "ghostwhite",
             padding: "4rem 0", top: 0, left: 0, height: "100%", width: "100%"
-        })}><span className={styles.orange}>{title[0]}</span>{title.substring(1)}</h1>
+        })}>
+            <span className={styles.orange}>{title[0]}</span>{title.substring(1)}</h1>
         <div className={styles.bodyContainer} >
             {props.children}
         </div>
     </div>
 }
-
 export default App; 
