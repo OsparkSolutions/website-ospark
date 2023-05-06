@@ -8,7 +8,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@fluentui/merge-styles": "^8.5.3",
-    "@fluentui/react": "^8.106.8",
+    "@fluentui/react": "^8.107.4",
     "@fontsource/roboto": "^4.5.8",
     "@mui/material": "^5.10.10",
     "@testing-library/jest-dom": "^5.16.5",
