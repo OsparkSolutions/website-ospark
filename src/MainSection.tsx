@@ -1,6 +1,6 @@
 import { mergeStyles } from '@fluentui/merge-styles';
 import * as styles from './styles';
-import { Shell, Spark } from 'spark_app_v2';
+import { Shell, useSpark } from 'spark_app_v2';
 import { useRef, useState } from 'react';
 
 export const MainSection = () => {
@@ -13,19 +13,19 @@ export const MainSection = () => {
         [0.69, 0xff7700, 1, 2],
         [1.5, 0xff7700, 1, 2]]
     )
-
+    const { Spark, mousePosition } = useSpark({parentElementRef: parentRef, defaults: {
+        numberOfLines: 500,
+        pulseRate: 20,
+        rotation: 2,
+        scale: 10,
+        translateX: -446,
+        translateXPx: true,
+        translateY: 48.5
+    }, shells: myShells})
     return (
-        <div id='main hoe'  ref={parentRef} className={mergeStyles(styles.widthConstrained, {
+        <div style={{}} id='main div' ref={parentRef} className={mergeStyles(styles.widthConstrained, {
         })}>
-            <Spark parentElementRef={parentRef} defaults={{
-                    numberOfLines: 500,
-                    pulseRate: 20,
-                    rotation: 2,
-                    scale: 10,
-                    translateX: -446,
-                    translateXPx: true,
-                    translateY: 48.5
-                }} shells={myShells} width={parentRef.current?.clientWidth} height={parentRef.current?.clientHeight}/>
+            <Spark />
 
             <div className={mergeStyles(
                 styles.innerShadow,

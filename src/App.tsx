@@ -19,7 +19,6 @@ import './fonts.css'
 import { useWindowSize } from './useWindowSize'
 import { WorkGrid } from './WorkGrid';
 import * as styles from './styles'
-import { Shell, Spark } from 'spark_app_v2';
 import { mergeStyles } from '@fluentui/merge-styles';
 import 'animate.css'
 //library.add(fas, faTwitter, faFacebook, faGithub, faLinkedin, faLocationDot, faPhone, faEnvelope)
