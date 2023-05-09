@@ -1,7 +1,7 @@
-import { IStyle, mergeStyles, mergeStyleSets } from '@fluentui/merge-styles';
+import { IStyle, mergeStyles, mergeStyleSets, keyframes } from '@fluentui/merge-styles';
 import { findByLabelText } from '@testing-library/react';
 import { NONAME } from 'dns';
-import { readBuilderProgram } from 'typescript';
+import { readBuilderProgram, transform } from 'typescript';
 import crack2 from './images/crack2.png'
 import crack from './images/crack.jpg'
 import waymark from './images/waymark.jpg'
@@ -121,6 +121,20 @@ export const parameterInput = mergeStyles({
     width: '75px'
 })
 
+const t = keyframes({
+    // '0%': {transform: 'scale(1)'},
+    '100%': {transform: 'scale(1.1)'}
+})
+export const listItem = mergeStyles({
+    ':hover' : {
+        animationName: t,
+        animationDuration: '0.5s',
+        animationFillMode: 'forwards',
+        cursor: 'pointer'
+    },
+    
+    
+})
 
 
 export const mainParagraph = mergeStyles({

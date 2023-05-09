@@ -1,11 +1,12 @@
 import { mergeStyles } from '@fluentui/merge-styles';
 import * as styles from './styles';
 import { Shell, useSpark } from 'spark_app_v2';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export const MainSection = () => {
-
+    const titleRef = useRef<HTMLDivElement>(null)
     const parentRef = useRef<HTMLDivElement>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
 
     const [myShells, setShells] = useState<Shell[]>([
         // [1, 0xff7700, 1, 2],
@@ -13,7 +14,8 @@ export const MainSection = () => {
         [0.69, 0xff7700, 1, 2],
         [1.5, 0xff7700, 1, 2]]
     )
-    const { Spark, mousePosition } = useSpark({parentElementRef: parentRef, defaults: {
+    
+    const { Spark, sparkPosition } = useSpark({parentElementRef: parentRef, defaults: {
         numberOfLines: 500,
         pulseRate: 20,
         rotation: 2,
@@ -22,8 +24,38 @@ export const MainSection = () => {
         translateXPx: true,
         translateY: 48.5
     }, shells: myShells})
+
+    useEffect(()=>{
+        if(parentRef.current && titleRef.current){
+            const titleRect = titleRef.current?.getBoundingClientRect()
+            const boundingRect = parentRef.current.getBoundingClientRect()
+           
+            // mousePosition.current = {x: titleRect.left - boundingRect.left, y: titleRect.top-boundingRect.top-15}
+            // sparkPosition.current = {x: (boundingRect.width/2)-448, y: (boundingRect.height/2)-15}
+
+        }
+
+    },[])
+    
+    const handleMouseLeave = (event:any) => {
+        if(sparkPosition.current){
+            sparkPosition.current = undefined
+        }
+    }
+
+    const handleMouseMove = (event: any) =>{
+        if(parentRef.current){
+            const boundingRect = parentRef.current.getBoundingClientRect();
+            const rect = event.currentTarget.getBoundingClientRect();
+            console.log('im triggered')
+            sparkPosition.current = {x: rect.left - (boundingRect.width/2) -80, y: (boundingRect.height/2)-rect.top+25}
+            // console.log(rect)
+        }
+        
+    }
+
     return (
-        <div style={{}} id='main div' ref={parentRef} className={mergeStyles(styles.widthConstrained, {
+        <div onMouseLeave={handleMouseLeave} id='main div' ref={parentRef} className={mergeStyles(styles.widthConstrained, {
         })}>
             <Spark />
 
@@ -48,7 +80,7 @@ export const MainSection = () => {
                     alignItems: "center",
                     display: "flex",
                 })}>
-                    <div className={mergeStyles({ textAlign: "right" })}>
+                    <div ref={titleRef} className={mergeStyles({ textAlign: "right" })}>
                         <a href='#' className={mergeStyles(styles.logo, {
                             textShadow: "0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white",
                             //backdropFilter: 'blur(2px)',
@@ -60,14 +92,14 @@ export const MainSection = () => {
                         listStyle: "none",
                         fontSize: "40px",
                         "li": {
-                            padding: "32px"
+                            padding: "32px",
                         }
                     })} >
-                        <li><a>What We Do</a></li>
-                        <li className={mergeStyles({
+                        <li onMouseMove={handleMouseMove} className={styles.listItem}><a>What We Do</a></li>
+                        <li onMouseMove={handleMouseMove} className={mergeStyles({
                             marginLeft: "64px"
-                        })}><a>What We've Done</a></li>
-                        <li><a>Get in Touch!</a></li>
+                        }, styles.listItem)}><a>What We've Done</a></li>
+                        <li onMouseMove={handleMouseMove} className={styles.listItem}><a>Get in Touch!</a></li>
                     </ul>
                 </div>
             </div>
