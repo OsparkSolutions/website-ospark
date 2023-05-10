@@ -47,7 +47,6 @@ export const MainSection = () => {
         if(parentRef.current){
             const boundingRect = parentRef.current.getBoundingClientRect();
             const rect = event.currentTarget.getBoundingClientRect();
-            console.log(rect.width)
             sparkPosition.current = {x: rect.left - (boundingRect.width/2) -110, y: (boundingRect.height/2)-rect.top+30}
             // console.log(rect)
         }
