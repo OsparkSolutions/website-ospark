@@ -47,8 +47,8 @@ export const MainSection = () => {
         if(parentRef.current){
             const boundingRect = parentRef.current.getBoundingClientRect();
             const rect = event.currentTarget.getBoundingClientRect();
-            console.log('im triggered')
-            sparkPosition.current = {x: rect.left - (boundingRect.width/2) -80, y: (boundingRect.height/2)-rect.top+25}
+            console.log(rect.width)
+            sparkPosition.current = {x: rect.left - (boundingRect.width/2) -110, y: (boundingRect.height/2)-rect.top+30}
             // console.log(rect)
         }
         
@@ -95,11 +95,11 @@ export const MainSection = () => {
                             padding: "32px",
                         }
                     })} >
-                        <li onMouseMove={handleMouseMove} className={styles.listItem}><a>What We Do</a></li>
-                        <li onMouseMove={handleMouseMove} className={mergeStyles({
+                        <li onMouseEnter={handleMouseMove} className={styles.listItem}><a>What We Do</a></li>
+                        <li onMouseEnter={handleMouseMove} className={mergeStyles({
                             marginLeft: "64px"
                         }, styles.listItem)}><a>What We've Done</a></li>
-                        <li onMouseMove={handleMouseMove} className={styles.listItem}><a>Get in Touch!</a></li>
+                        <li onMouseEnter={handleMouseMove} className={styles.listItem}><a>Get in Touch!</a></li>
                     </ul>
                 </div>
             </div>
