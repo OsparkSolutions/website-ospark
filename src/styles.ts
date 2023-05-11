@@ -47,6 +47,8 @@ export const navBarButtons = mergeStyles({
 
 export const header = mergeStyles({
     position: 'fixed',
+    top: 0,
+    visibility: 'hidden',   
     width: 'inherit',
     backgroundColor: 'rgba(0,0,0,0.1)',
     //blurs nav bar
@@ -565,6 +567,7 @@ export const boxedShadow = mergeStyles({
 
 
 /* This container is needed to position the front and back side */
+
 export const cardFlip = mergeStyleSets({
     flipCard: {
         //backgroundColor: transparent;
@@ -594,4 +597,11 @@ export const cardFlip = mergeStyleSets({
         transform: "rotateY(180deg)"
     }
 })
+export const flipper = mergeStyles({
+    perspective: '1000px',
+    transform: 'rotateY(180deg)',
+    transition: "transform 0.8s",
+    transformStyle: "preserve-3d",
+})
+
 

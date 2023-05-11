@@ -37,10 +37,8 @@ function App() {
     const windowSize = useWindowSize();
     useEffect(() => {
         return () => {
-            //console.log('i am cleaning up!' + windowSize.width);
         }
     }, [windowSize.width, windowSize.height, windowSize.deviceSize])
-
 
     //Scroll positioning
     let lastKnownScrollPosition = 0;
@@ -64,6 +62,8 @@ function App() {
                 width: "100%",
                 backgroundColor: "white"
             })}>
+                <NavBar isOpen={isOpen} setIsOpen={setIsOpen}/>
+
                 
                 <MainSection />
             </div>
