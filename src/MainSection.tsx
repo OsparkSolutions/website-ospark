@@ -2,11 +2,23 @@ import { mergeStyles } from '@fluentui/merge-styles';
 import * as styles from './styles';
 import { Shell, useSpark } from 'spark_app_v2';
 import { useRef, useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { NavBarProps } from './App';
 
-export const MainSection = () => {
+export const MainSection = (props: NavBarProps) => {
     const titleRef = useRef<HTMLDivElement>(null)
     const parentRef = useRef<HTMLDivElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
+
+    const { ref: listItem1Ref, inView: listItem1Visible } = useInView({threshold: 1});
+    const { ref: listItem2Ref, inView: listItem2Visible } = useInView({threshold: 1});
+    const { ref: listItem3Ref, inView: listItem3Visible } = useInView({threshold: 1});
+
+    props.setNavOpen(!listItem1Visible)
+    props.setItem1Visible(!listItem1Visible)
+    props.setItem2Visible(!listItem2Visible)
+    props.setItem3Visible(!listItem3Visible)
+    
 
     const [myShells, setShells] = useState<Shell[]>([
         // [1, 0xff7700, 1, 2],
@@ -94,11 +106,11 @@ export const MainSection = () => {
                             padding: "32px",
                         }
                     })} >
-                        <li onMouseEnter={handleMouseMove} className={styles.listItem}><a>What We Do</a></li>
-                        <li onMouseEnter={handleMouseMove} className={mergeStyles({
+                        <li ref={listItem1Ref} onMouseEnter={handleMouseMove} className={styles.listItem}><a>What We Do</a></li>
+                        <li ref={listItem2Ref} onMouseEnter={handleMouseMove} className={mergeStyles({
                             marginLeft: "64px"
                         }, styles.listItem)}><a>What We've Done</a></li>
-                        <li onMouseEnter={handleMouseMove} className={styles.listItem}><a>Get in Touch!</a></li>
+                        <li ref={listItem3Ref} onMouseEnter={handleMouseMove} className={styles.listItem}><a>Get in Touch!</a></li>
                     </ul>
                 </div>
             </div>

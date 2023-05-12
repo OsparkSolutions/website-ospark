@@ -48,13 +48,24 @@ export const navBarButtons = mergeStyles({
 export const header = mergeStyles({
     position: 'fixed',
     top: 0,
-    visibility: 'hidden',   
     width: 'inherit',
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: 'rgba(0,0,0,0.1)',    
     //blurs nav bar
     backdropFilter: 'blur(8px)',
     zIndex: '9',
-});
+})
+export const headerClosed = mergeStyles({
+    position: 'fixed',
+    top: 0,
+    width: 'inherit',
+    height: 0,
+    backgroundColor: 'rgba(0,0,0,0.1)',    
+    //blurs nav bar
+    backdropFilter: 'blur(8px)',
+    zIndex: '9',
+    overflowY: 'hidden',
+})
+
 
 export const navBarContainer = mergeStyles({
     display: 'flex',

@@ -1,11 +1,11 @@
 import { Stylesheet } from "@fluentui/merge-styles";
 import { MouseEventHandler, useEffect, useState } from "react";
-import { ContactFormProps } from "./App";
+import { ContactFormProps, NavBarProps } from "./App";
 import { runAsync } from "./helper";
 import * as styles from "./styles";
 
 
-export const ContactForm = (props: ContactFormProps) => {
+export const ContactForm = (props: ContactFormProps & NavBarProps) => {
     //tracks the state of contact form overlay whether or not its open
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');

@@ -120,7 +120,8 @@ const MyComponent = (props: any) => {
                     display: "flex",
                     flexWrap: "wrap",
                     //justifyContent: "space-evenly",
-                    alignItems: "flex-start",
+                    alignItems: "center",
+                    justifyContent: 'center',
                 }
             )}>
                 {props.boxes.map((box: BoxComponent, i: any) => {
@@ -132,6 +133,7 @@ const MyComponent = (props: any) => {
                         className={mergeStyles(
                             styles.innerShadowSmall,
                             {
+                                borderRadius: '13%',
                                 overflow: "hidden",
                                 width: "8rem",
                                 marginRight: "1rem",

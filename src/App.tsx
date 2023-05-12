@@ -28,12 +28,31 @@ export interface ContactFormProps {
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
+export interface NavBarProps {
+    navOpen: boolean;
+    bullet1Visible: boolean;
+    bullet2Visible: boolean;
+    bullet3Visible: boolean;
+    item1Open: boolean;
+    item2Open:boolean;
+    item3Open: boolean;
+    setNavOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setItem1Visible: React.Dispatch<React.SetStateAction<boolean>>
+    setItem2Visible: React.Dispatch<React.SetStateAction<boolean>>
+    setItem3Visible: React.Dispatch<React.SetStateAction<boolean>>
+
+}
 
 function App() {
 
     const [isOpen, setIsOpen] = useState(false);
-
-
+    const [navOpen, setNavOpen] = useState(false);
+    const [item1Open, setItem1Visible] = useState(false)
+    const [item2Open, setItem2Visible] = useState(false)
+    const [item3Open, setItem3Visible] = useState(false)
+    const [bullet1Visible, setBullet1Visibile] = useState(false)
+    const [bullet2Visible, setBullet2Visibile] = useState(false)
+    const [bullet3Visible, setBullet3Visibile] = useState(false)
     const windowSize = useWindowSize();
     useEffect(() => {
         return () => {
@@ -62,10 +81,34 @@ function App() {
                 width: "100%",
                 backgroundColor: "white"
             })}>
-                <NavBar isOpen={isOpen} setIsOpen={setIsOpen}/>
+                <NavBar 
+                isOpen={isOpen} 
+                setIsOpen={setIsOpen} 
+                navOpen={navOpen} 
+                setNavOpen={setNavOpen} 
+                bullet1Visible={bullet1Visible} 
+                bullet2Visible={bullet2Visible} 
+                bullet3Visible={bullet3Visible}
+                setItem1Visible={setItem1Visible}
+                setItem2Visible={setItem2Visible}
+                setItem3Visible={setItem3Visible}
+                item1Open={item1Open}
+                item2Open={item2Open}
+                item3Open={item3Open}
+                />
 
                 
-                <MainSection />
+                <MainSection navOpen={navOpen} 
+                setNavOpen={setNavOpen} 
+                bullet1Visible={bullet1Visible} 
+                bullet2Visible={bullet2Visible} 
+                bullet3Visible={bullet3Visible}
+                setItem1Visible={setItem1Visible}
+                setItem2Visible={setItem2Visible}
+                setItem3Visible={setItem3Visible}
+                item1Open={item1Open}
+                item2Open={item2Open}
+                item3Open={item3Open}/>
             </div>
             <div className={mergeStyles(styles.fieldwork, {
                 position: "relative",
@@ -108,7 +151,20 @@ function App() {
             <div className={styles.bodyContainer}>
                 <OurWork />
                 <WorkGrid />
-                <ContactForm isOpen={isOpen} setIsOpen={setIsOpen} />
+                <ContactForm 
+                isOpen={isOpen} 
+                setIsOpen={setIsOpen} 
+                navOpen={navOpen} 
+                setNavOpen={setNavOpen} 
+                bullet1Visible={bullet1Visible} 
+                bullet2Visible={bullet2Visible} 
+                bullet3Visible={bullet3Visible}
+                setItem1Visible={setItem1Visible}
+                setItem2Visible={setItem2Visible}
+                setItem3Visible={setItem3Visible}
+                item1Open={item1Open}
+                item2Open={item2Open}
+                item3Open={item3Open}/>
             </div>
             <Footer />
         </>
