@@ -16,7 +16,7 @@ export const NavBar = (props: ContactFormProps & NavBarProps) =>{
             <a href="#" style={{display: props.item2Open ? 'inline' : 'none'}}>
               <p>What We've Done</p>
             </a>
-            <a href="#" style={{display: props.item3Open ? 'inline' : 'none'}}>
+            <a href="#" style={{display: props.item3Open ? 'inline' : 'none'}} className={styles.navBarButton}>
               <p>Get In Touch</p>
             </a>
           </div>
