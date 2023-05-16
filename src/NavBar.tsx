@@ -4,12 +4,14 @@ import { ContactForm } from './ContactForm';
 import { ContactFormProps, NavBarProps } from './App';
 
 export const NavBar = (props: ContactFormProps & NavBarProps) =>{
-    console.log(props.item1Open)
     return(
       <header className = {props.navOpen ? styles.header : styles.headerClosed}>
         <div className = {styles.navBarContainer}>
           <a href='#'className = {styles.logo}>Orange<span>Spark</span></a>
           <div className = {styles.navBarButtons}>
+          {props.item1Open && <a href='#' onClick={() => props.setIsOpen(true)} style={{display: props.item1Open ? 'inline' : 'none'}}>
+              <p>Test</p>
+            </a>}
             <a href='#' onClick={() => props.setIsOpen(true)} style={{display: props.item1Open ? 'inline' : 'none'}}>
               <p>What We Do</p>
             </a>

@@ -81,7 +81,9 @@ function App() {
                 width: "100%",
                 backgroundColor: "white"
             })}>
-                <NavBar 
+                {/* NavBar now inside MAINSECTION */}
+                
+                {/* <NavBar 
                 isOpen={isOpen} 
                 setIsOpen={setIsOpen} 
                 navOpen={navOpen} 
@@ -95,10 +97,13 @@ function App() {
                 item1Open={item1Open}
                 item2Open={item2Open}
                 item3Open={item3Open}
-                />
+                /> */}
 
                 
-                <MainSection navOpen={navOpen} 
+                <MainSection 
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                navOpen={navOpen} 
                 setNavOpen={setNavOpen} 
                 bullet1Visible={bullet1Visible} 
                 bullet2Visible={bullet2Visible} 

@@ -16,6 +16,9 @@ export const widthConstrained = mergeStyles({
     width: '90%',
     margin: 'auto'
 })
+export const navOpenStyle = mergeStyles({
+    zIndex: 99
+})
 
 
 export const bodyContainer = mergeStyles({
@@ -53,7 +56,7 @@ export const navBarButton = mergeStyles({
 export const header = mergeStyles({
     position: 'fixed',
     top: 0,
-    width: 'inherit',
+    width: '100%',
     backgroundColor: 'rgba(0,0,0,0.1)',    
     //blurs nav bar
     backdropFilter: 'blur(8px)',
@@ -128,6 +131,23 @@ export const subSliderContainer = mergeStyles({
     justifyContent: 'space-between'
 
 })
+export const flipAnimateContainerInitial = mergeStyles({
+    boxSizing: "border-box",
+    flexGrow: 1,
+    flexBasis: "10px",
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+})
+
+export const flipAnimateContainerAfter = mergeStyles({
+    boxSizing: "border-box",
+    flexGrow: 1,
+    flexBasis: "10px",
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+})
 export const anotherSliderContainer = mergeStyles({
     width: '150px',
     border: '2px solid black'
@@ -140,10 +160,14 @@ export const parameterInput = mergeStyles({
 })
 
 const t = keyframes({
-    // '0%': {transform: 'scale(1)'},
     '100%': {transform: 'scale(1.1)'}
 })
-export const listItem = mergeStyles({
+export const anchorItem = mergeStyles({
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    height: '100%',
+    width: '100%',
     ':hover' : {
         animationName: t,
         animationDuration: '0.5s',
@@ -151,7 +175,29 @@ export const listItem = mergeStyles({
         cursor: 'pointer'
     },
     
+})
+export const staticListItem1 = mergeStyles({
+    zindex: '99',
+    position: 'fixed',
+    fontSize: '25px',
+    // right: '500px',
+    // top: '15px',
     
+})
+export const staticListItem2 = mergeStyles({
+    zindex: '99',
+    position: 'fixed',
+    fontSize: '25px',
+    top: '15px',
+    right: '230px'
+    
+})
+export const staticListItem3 = mergeStyles({
+    zindex: '99',
+    position: 'fixed',
+    top: '15px',
+    fontSize: '25px',
+    right: '30px'
 })
 
 
@@ -174,7 +220,7 @@ export const sectionHeader = mergeStyles({
     textAlign: 'center',
     marginBottom: '75px',
     fontSize: '50px',
-    color: '#212121'
+    color: '#212121',
 })
 export const largeScreenImageContainer = mergeStyles({
     width: '80%',
