@@ -29,13 +29,6 @@ export const bodyContainer = mergeStyles({
     //    boxShadow: '0px 2px 20px 5px #A09C9B',
 })
 
-export const logo = mergeStyles(fieldwork, {
-    fontSize: '50px',
-    color: '#f37322',
-    cursor: 'pointer',
-    textDecoration: 'none',
-    'span': { color: 'black' },
-});
 
 export const navBarButtons = mergeStyles({
     display: 'flex',
@@ -131,7 +124,7 @@ export const subSliderContainer = mergeStyles({
     justifyContent: 'space-between'
 
 })
-export const flipAnimateContainerInitial = mergeStyles({
+export const flipAnimateContainerInitial = mergeStyles("animate__animated animate__flipInX", {
     boxSizing: "border-box",
     flexGrow: 1,
     flexBasis: "10px",
@@ -162,42 +155,98 @@ export const parameterInput = mergeStyles({
 const t = keyframes({
     '100%': {transform: 'scale(1.1)'}
 })
+
+const titleAnimation = keyframes({
+    '100%': {
+        transform: 'scale(.5)',
+        top: '-15px',
+        left: '-85px'
+    }
+})
+
+const anchor1Animate = keyframes({
+    '100%': {
+        transform: 'scale(.7)',
+        top:'5px',
+        right: '0px',
+    }
+})
+const anchor2Animate = keyframes({
+    '100%': {
+        transform: 'scale(.7)',
+        top:'5px',
+        right: '0px',
+    }
+})
+const anchor3Animate = keyframes({
+    '100%': {
+        transform: 'scale(.7)',
+        top:'5px',
+        right: '0px',
+    }
+})
 export const anchorItem = mergeStyles({
     position: 'absolute',
-    top: '0',
-    left: '0',
+    zindex: '99',
     height: '100%',
     width: '100%',
+    transition: 'top 4s, right 4s, transform 2s',
     ':hover' : {
         animationName: t,
-        animationDuration: '0.5s',
+        animationDuration: '1s',
         animationFillMode: 'forwards',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        textDecoration: 'none'
     },
     
 })
+
+export const logo = mergeStyles(fieldwork, {
+    fontSize: 75,
+    color: '#f37322',
+    cursor: 'pointer',
+    textDecoration: 'none',
+    textShadow: "0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white",
+    'span': {
+        fontSize: 75,
+        color: 'black'
+    },
+});
+
+export const animateTitle = mergeStyles(fieldwork, {
+    fontSize: 75,
+    alignSelf: "center",
+    color: '#f37322',
+    textDecoration: 'none',
+    animationName: titleAnimation,
+    transition: 'top 1s, left 1s',
+
+    animationDuration: '.5s',
+    animationFillMode: 'forwards',
+    'span': { color: 'black' },
+
+})
 export const staticListItem1 = mergeStyles({
-    zindex: '99',
-    position: 'fixed',
-    fontSize: '25px',
+    // position: 'fixed',
+    // fontSize: '25px',
     // right: '500px',
     // top: '15px',
-    
+    position: 'fixed',
+    left: '',
+    animationName: anchor1Animate,
+    animationDuration: '.5s',
+    animationFillMode: 'forwards',
 })
 export const staticListItem2 = mergeStyles({
-    zindex: '99',
-    position: 'fixed',
-    fontSize: '25px',
-    top: '15px',
-    right: '230px'
+    animationName: anchor2Animate,
+    animationDuration: '.5s',
+    animationFillMode: 'forwards',
     
 })
 export const staticListItem3 = mergeStyles({
-    zindex: '99',
-    position: 'fixed',
-    top: '15px',
-    fontSize: '25px',
-    right: '30px'
+    animationName: anchor3Animate,
+    animationDuration: '.5s',
+    animationFillMode: 'forwards',
 })
 
 

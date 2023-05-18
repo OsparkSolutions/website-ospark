@@ -5,23 +5,114 @@ import { useRef, useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { NavBarProps, ContactFormProps } from './App';
 
+export const fieldwork = mergeStyles({
+    fontFamily: 'fieldwork, sans-serif',
+})
+
 export const MainSection = (props: NavBarProps & ContactFormProps) => {
-    const titleRef = useRef<HTMLDivElement>(null)
+    const titleAnchorRef = useRef<HTMLAnchorElement>(null)
     const parentRef = useRef<HTMLDivElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
 
-    const { ref: listItem1Ref, inView: listItem1Visible } = useInView({ threshold: 1 });
-    const { ref: listItem2Ref, inView: listItem2Visible } = useInView({ threshold: 1 });
-    const { ref: listItem3Ref, inView: listItem3Visible } = useInView({ threshold: 1 });
+    const anchor1ref = useRef<HTMLAnchorElement>(null)
+    const anchor2ref = useRef<HTMLAnchorElement>(null)
+    const anchor3ref = useRef<HTMLAnchorElement>(null)
 
+    const { ref: titleRef, inView: titleAnchorVisible} = useInView({
+       threshold: 1,
+       onChange: () =>{
+        if(titleAnchorRef.current){
+            
+        }
+        if(titleAnchorRef.current && titleAnchorVisible === true){
+            const titleRect = titleAnchorRef.current.getBoundingClientRect()
+            titleAnchorRef.current.style.position = 'fixed'
+            titleAnchorRef.current.style.top = `${titleRect.y}px`
+            titleAnchorRef.current.style.left = `${titleRect.x}px`
+        }
+        else{
+            if(titleAnchorRef.current){
+                titleAnchorRef.current.style.top = ''
+                titleAnchorRef.current.style.left = ''
+                titleAnchorRef.current.style.position = ''
+                titleAnchorRef.current.style.textShadow = ''
+                titleAnchorRef.current.style.alignSelf = ''
+
+            } 
+        }
+       }
+    })
+
+    const { ref: listItem1Ref, inView: listItem1Visible } = useInView({
+        threshold: 1,
+        onChange: (inView, entry) =>{
+            if(anchor1ref.current && listItem1Visible === true){
+                const anchor1Box = anchor1ref.current.getBoundingClientRect()
+
+                anchor1ref.current.style.position = 'fixed'
+                anchor1ref.current.style.top = `${anchor1Box.y}px`
+                anchor1ref.current.style.left = `${anchor1Box.x}px`
+
+            }
+            else{
+                if(anchor1ref.current){
+                    anchor1ref.current.style.top = ''
+                    anchor1ref.current.style.left = ''
+                    anchor1ref.current.style.position = ''
+                }
+            }
+        }
+    });
+    const { ref: listItem2Ref, inView: listItem2Visible } = useInView({ threshold: 1,
+        onChange: (inView, entry) =>{
+            if(anchor2ref.current && listItem2Visible === true){
+                const anchor2Box = anchor2ref.current.getBoundingClientRect()
+                anchor2ref.current.style.position = 'fixed'
+                anchor2ref.current.style.top = `${anchor2Box.y}px`
+                anchor2ref.current.style.left = `${anchor2Box.x}px`
+
+            }
+            else{
+                if(anchor2ref.current){
+                    anchor2ref.current.style.top = ''
+                    anchor2ref.current.style.left = ''
+                    anchor2ref.current.style.position = ''
+                }
+            }
+        } });
+    const { ref: listItem3Ref, inView: listItem3Visible } = useInView({ threshold: 1,
+        onChange: (inView, entry) =>{
+            if(anchor3ref.current && listItem3Visible === true){
+                const anchor3Box = anchor3ref.current.getBoundingClientRect()
+                anchor3ref.current.style.position = 'fixed'
+                anchor3ref.current.style.top = `${anchor3Box.y}px`
+                anchor3ref.current.style.left = `${anchor3Box.x}px`
+
+            }
+            else{
+                if(anchor3ref.current){
+                    anchor3ref.current.style.top = ''
+                    anchor3ref.current.style.left = ''
+                    anchor3ref.current.style.position = ''
+                }
+            }
+        } });
+
+    
     props.setNavOpen(!listItem1Visible)
     props.setItem1Visible(!listItem1Visible)
     props.setItem2Visible(!listItem2Visible)
     props.setItem3Visible(!listItem3Visible)
 
-    // if(!listItem1Visible){
-    //     const element = 
-    //     console.log(element.top)
+    // if(anchor1ref.current && anchor2ref.current && anchor3ref.current && !listItem1Visible){
+    //     console.log(listItem1Visible)
+    //     const anchor1Box = anchor1ref.current.getBoundingClientRect()
+    //     const anchor2Box = anchor2ref.current.getBoundingClientRect()
+    //     const anchor3Box = anchor3ref.current.getBoundingClientRect()
+    //     console.log(anchor1Box.top, anchor1Box.left)
+    //     anchor1ref.current.style.top = '30px'
+    //     anchor1ref.current.style.left = '623px'
+    //     anchor1ref.current.style.position = 'fixed'
     // }
 
     const [myShells, setShells] = useState<Shell[]>([
@@ -43,17 +134,14 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
         }, shells: myShells
     })
 
-    useEffect(() => {
-        if (parentRef.current && titleRef.current) {
-            const titleRect = titleRef.current?.getBoundingClientRect()
-            const boundingRect = parentRef.current.getBoundingClientRect()
-
-            // mousePosition.current = {x: titleRect.left - boundingRect.left, y: titleRect.top-boundingRect.top-15}
-            // sparkPosition.current = {x: (boundingRect.width/2)-448, y: (boundingRect.height/2)-15}
-
-        }
-
-    }, [])
+    // useEffect(() => {
+    //     if (parentRef.current && titleRef.current) {
+    //         const titleRect = titleRef.current?.getBoundingClientRect()
+    //         const boundingRect = parentRef.current.getBoundingClientRect()
+    //         // mousePosition.current = {x: titleRect.left - boundingRect.left, y: titleRect.top-boundingRect.top-15}
+    //         // sparkPosition.current = {x: (boundingRect.width/2)-448, y: (boundingRect.height/2)-15}
+    //     }
+    // }, [])
 
     const handleMouseLeave = (event: any) => {
         if (sparkPosition.current) {
@@ -74,7 +162,7 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
         <div>
             <header className={props.navOpen ? styles.header : styles.headerClosed}>
                 <div className={styles.navBarContainer}>
-                    <a href='#' className={styles.logo}>Orange<span>Spark</span></a>
+                    {/* <a href='#' className={styles.logo}>Orange<span>Spark</span></a> */}
                     <div className={styles.navBarButtons}>
                         {/* {props.item1Open && <a href='#' onClick={() => props.setIsOpen(true)} style={{ display: props.item1Open ? 'inline' : 'none' }}>
                             <p>Test</p>
@@ -108,13 +196,21 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
                     }
                 )}>
                     <div className={props.navOpen ? styles.flipAnimateContainerAfter : styles.flipAnimateContainerInitial}>
-                        <div ref={titleRef} className={mergeStyles({ textAlign: "right" })}>
-                            <a href='#' className={mergeStyles(styles.logo, {
-                                textShadow: "0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white",
-                                //backdropFilter: 'blur(2px)',
+                        <div ref={titleRef} className={mergeStyles({ textAlign: "right", display: 'flex'})}>
+                            <a ref={titleAnchorRef} href='#' className={mergeStyles(titleAnchorVisible ? styles.logo : styles.animateTitle, {
+                                position: 'absolute',
+                                alignSelf: "center",
+
+                            })}>Orange<span>Spark</span> </a>
+                            <span  className={mergeStyles(fieldwork, {
+                                textDecoration: 'none',
                                 fontSize: 75,
                                 alignSelf: "center",
-                            })}>Orange<span>Spark</span></a>
+                                visibility: 'hidden', 
+                                color: 'orange',
+                            })}>Orange<span>Spark</span></span>
+
+                           
                         </div>
                         <ul className={mergeStyles(styles.fieldwork, {
                             listStyle: "none",
@@ -125,9 +221,9 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
                                 whiteSpace: 'nowrap'
                             }
                         })} >
-                            <AnchorItem listItemVisible={listItem1Visible} title='What We Do' itemStyleName={styles.staticListItem1} myItemRef={listItem1Ref} handleMouseMove={handleMouseMove} itemOpen={props.item1Open} />
-                            <AnchorItem listItemVisible={listItem2Visible} title="What We've Done" itemStyleName={styles.staticListItem2} myItemRef={listItem2Ref} handleMouseMove={handleMouseMove} itemOpen={props.item2Open} leftMargin={true} />
-                            <AnchorItem listItemVisible={listItem3Visible} title="Get In Touch" itemStyleName={styles.staticListItem3} myItemRef={listItem3Ref} handleMouseMove={handleMouseMove} itemOpen={props.item3Open} />
+                            <AnchorItem anchorRef={anchor1ref} listItemVisible={listItem1Visible} title='What We Do' itemStyleName={styles.staticListItem1} myItemRef={listItem1Ref} handleMouseMove={handleMouseMove} itemOpen={props.item1Open} />
+                            <AnchorItem anchorRef={anchor2ref} listItemVisible={listItem2Visible} title="What We've Done" itemStyleName={styles.staticListItem2} myItemRef={listItem2Ref} handleMouseMove={handleMouseMove} itemOpen={props.item2Open} leftMargin={true} />
+                            <AnchorItem anchorRef={anchor3ref} listItemVisible={listItem3Visible} title="Get In Touch" itemStyleName={styles.staticListItem3} myItemRef={listItem3Ref} handleMouseMove={handleMouseMove} itemOpen={props.item3Open} />
                         </ul>
                     </div>
                     {/* <div style={{ position: 'fixed' }}>TEST</div> */}
@@ -149,6 +245,7 @@ type AnchorItemProps = {
     title: string,
     itemStyleName: string,
     listItemVisible: boolean,
+    anchorRef: any
 }
 
 const AnchorItem = (props: AnchorItemProps) => {
@@ -159,7 +256,7 @@ const AnchorItem = (props: AnchorItemProps) => {
     return (
         <li ref={props.myItemRef} onMouseEnter={props.handleMouseMove} className={props.leftMargin ? mergeStyles({marginLeft: '64px'}) : undefined}>
             <span style={{ position: 'relative' }}>
-                <a className={props.itemOpen ? props.itemStyleName : styles.anchorItem}>{props.title}</a>
+                <a ref={props.anchorRef} className={props.itemOpen ? props.itemStyleName : styles.anchorItem}>{props.title}</a>
                 <span style={{ visibility: 'hidden', color: 'orange' }}>{props.title}</span>
             </span>
         </li>
