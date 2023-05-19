@@ -8,6 +8,8 @@ import { NavBarProps, ContactFormProps } from './App';
 export const fieldwork = mergeStyles({
     fontFamily: 'fieldwork, sans-serif',
 })
+//distances used to calc travel speed of nav bar anchor animations
+export const distances = {anchor1: 0, anchor2: 200, anchor3: 500}
 
 export const MainSection = (props: NavBarProps & ContactFormProps) => {
     const titleAnchorRef = useRef<HTMLAnchorElement>(null)
@@ -17,6 +19,27 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
     const anchor1ref = useRef<HTMLAnchorElement>(null)
     const anchor2ref = useRef<HTMLAnchorElement>(null)
     const anchor3ref = useRef<HTMLAnchorElement>(null)
+
+    const anchor1Dist = useRef<number>()
+    const anchor2Dist = useRef<number>()
+    const anchor3Dist = useRef<number>()
+
+    function getDistance(x1:number, y1:number, x2:number, y2:number){
+        let y = x2 - x1;
+        let x = y2 - y1;   
+        return Math.sqrt(x * x + y * y);
+    }
+    //point after animation: (window.innerWidth-{right input}, 0)
+    useEffect(() => {
+        if (anchor1ref.current && anchor2ref.current && anchor3ref.current) {
+            const anchorCords = { x: anchor1ref.current.getBoundingClientRect().x, y: anchor1ref.current?.getBoundingClientRect().y }
+            // console.log(anchorCords.x, anchorCords.y)
+            anchor1Dist.current = getDistance(anchorCords.x, anchorCords.y, window.innerWidth-distances.anchor1, 0)
+            anchor2Dist.current = getDistance(anchorCords.x, anchorCords.y, window.innerWidth-distances.anchor2, 0)
+            anchor3Dist.current = getDistance(anchorCords.x, anchorCords.y, window.innerWidth-distances.anchor3, 0)
+            console.log(anchor1Dist.current,anchor2Dist.current,anchor3Dist.current)
+        }
+    }, [])
 
     const { ref: titleRef, inView: titleAnchorVisible} = useInView({
        threshold: 1,
@@ -51,13 +74,13 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
 
                 anchor1ref.current.style.position = 'fixed'
                 anchor1ref.current.style.top = `${anchor1Box.y}px`
-                anchor1ref.current.style.left = `${anchor1Box.x}px`
-
+                // anchor1ref.current.style.left = `${anchor1Box.x}px`
+                anchor1ref.current.style.right = `${window.innerWidth-anchor1Box.right}px`
             }
             else{
                 if(anchor1ref.current){
                     anchor1ref.current.style.top = ''
-                    anchor1ref.current.style.left = ''
+                    anchor1ref.current.style.right = ''
                     anchor1ref.current.style.position = ''
                 }
             }
@@ -69,13 +92,13 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
                 const anchor2Box = anchor2ref.current.getBoundingClientRect()
                 anchor2ref.current.style.position = 'fixed'
                 anchor2ref.current.style.top = `${anchor2Box.y}px`
-                anchor2ref.current.style.left = `${anchor2Box.x}px`
+                anchor2ref.current.style.right = `${window.innerWidth-anchor2Box.right}px`
 
             }
             else{
                 if(anchor2ref.current){
                     anchor2ref.current.style.top = ''
-                    anchor2ref.current.style.left = ''
+                    anchor2ref.current.style.right = ''
                     anchor2ref.current.style.position = ''
                 }
             }
@@ -86,13 +109,13 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
                 const anchor3Box = anchor3ref.current.getBoundingClientRect()
                 anchor3ref.current.style.position = 'fixed'
                 anchor3ref.current.style.top = `${anchor3Box.y}px`
-                anchor3ref.current.style.left = `${anchor3Box.x}px`
+                anchor3ref.current.style.right = `${window.innerWidth-anchor3Box.right}px`
 
             }
             else{
                 if(anchor3ref.current){
                     anchor3ref.current.style.top = ''
-                    anchor3ref.current.style.left = ''
+                    anchor3ref.current.style.right = ''
                     anchor3ref.current.style.position = ''
                 }
             }
@@ -160,7 +183,7 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
 
     return (
         <div>
-            <header className={props.navOpen ? styles.header : styles.headerClosed}>
+            <header className={props.item1Open ? styles.header : styles.headerClosed}>
                 <div className={styles.navBarContainer}>
                     {/* <a href='#' className={styles.logo}>Orange<span>Spark</span></a> */}
                     <div className={styles.navBarButtons}>
@@ -221,9 +244,9 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
                                 whiteSpace: 'nowrap'
                             }
                         })} >
-                            <AnchorItem anchorRef={anchor1ref} listItemVisible={listItem1Visible} title='What We Do' itemStyleName={styles.staticListItem1} myItemRef={listItem1Ref} handleMouseMove={handleMouseMove} itemOpen={props.item1Open} />
-                            <AnchorItem anchorRef={anchor2ref} listItemVisible={listItem2Visible} title="What We've Done" itemStyleName={styles.staticListItem2} myItemRef={listItem2Ref} handleMouseMove={handleMouseMove} itemOpen={props.item2Open} leftMargin={true} />
-                            <AnchorItem anchorRef={anchor3ref} listItemVisible={listItem3Visible} title="Get In Touch" itemStyleName={styles.staticListItem3} myItemRef={listItem3Ref} handleMouseMove={handleMouseMove} itemOpen={props.item3Open} />
+                            <AnchorItem animationTime={()=>{if(anchor1Dist.current){return anchor1Dist.current/1000}}} anchorRef={anchor1ref} listItemVisible={listItem1Visible} title='What We Do' itemStyleName={styles.staticListItem1} myItemRef={listItem1Ref} handleMouseMove={handleMouseMove} itemOpen={props.item1Open} />
+                            <AnchorItem animationTime={()=>{if(anchor2Dist.current){return anchor2Dist.current/1000}}} anchorRef={anchor2ref} listItemVisible={listItem2Visible} title="What We've Done" itemStyleName={styles.staticListItem2} myItemRef={listItem2Ref} handleMouseMove={handleMouseMove} itemOpen={props.item2Open} leftMargin={true} />
+                            <AnchorItem animationTime={()=>{if(anchor3Dist.current){return anchor3Dist.current/1000}}} anchorRef={anchor3ref} listItemVisible={listItem3Visible} title="Get In Touch" itemStyleName={styles.staticListItem3} myItemRef={listItem3Ref} handleMouseMove={handleMouseMove} itemOpen={props.item3Open} />
                         </ul>
                     </div>
                     {/* <div style={{ position: 'fixed' }}>TEST</div> */}
@@ -245,7 +268,8 @@ type AnchorItemProps = {
     title: string,
     itemStyleName: string,
     listItemVisible: boolean,
-    anchorRef: any
+    anchorRef: any,
+    animationTime: () => number | undefined
 }
 
 const AnchorItem = (props: AnchorItemProps) => {
@@ -254,12 +278,14 @@ const AnchorItem = (props: AnchorItemProps) => {
     //     console.log(element.top)
     // }
     return (
-        <li ref={props.myItemRef} onMouseEnter={props.handleMouseMove} className={props.leftMargin ? mergeStyles({marginLeft: '64px'}) : undefined}>
+    
+        <li ref={props.myItemRef} onMouseEnter={props.handleMouseMove} className={props.leftMargin ? mergeStyles({ marginLeft: '64px' }) : undefined}>
             <span style={{ position: 'relative' }}>
-                <a ref={props.anchorRef} className={props.itemOpen ? props.itemStyleName : styles.anchorItem}>{props.title}</a>
+                <a ref={props.anchorRef} className={props.itemOpen ? mergeStyles({animationDuration: `${props.animationTime()}s`}, props.itemStyleName) : styles.anchorItem}>{props.title}</a>
                 <span style={{ visibility: 'hidden', color: 'orange' }}>{props.title}</span>
             </span>
         </li>
+        
     )
 
 }

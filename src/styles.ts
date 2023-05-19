@@ -5,6 +5,7 @@ import { readBuilderProgram, transform } from 'typescript';
 import crack2 from './images/crack2.png'
 import crack from './images/crack.jpg'
 import waymark from './images/waymark.jpg'
+import { distances } from './MainSection';
 
 export const orange = mergeStyles({ color: '#f37322' })
 export const fieldwork = mergeStyles({
@@ -54,6 +55,7 @@ export const header = mergeStyles({
     //blurs nav bar
     backdropFilter: 'blur(8px)',
     zIndex: '9',
+    height: '50px'
 })
 export const headerClosed = mergeStyles({
     position: 'fixed',
@@ -152,14 +154,14 @@ export const parameterInput = mergeStyles({
     width: '75px'
 })
 
-const t = keyframes({
+export const t = keyframes({
     '100%': {transform: 'scale(1.1)'}
 })
 
 const titleAnimation = keyframes({
     '100%': {
         transform: 'scale(.5)',
-        top: '-15px',
+        top: '-10px',
         left: '-85px'
     }
 })
@@ -175,14 +177,14 @@ const anchor2Animate = keyframes({
     '100%': {
         transform: 'scale(.7)',
         top:'5px',
-        right: '0px',
+        right: '200px',
     }
 })
 const anchor3Animate = keyframes({
     '100%': {
         transform: 'scale(.7)',
         top:'5px',
-        right: '0px',
+        right: '500px',
     }
 })
 export const anchorItem = mergeStyles({
@@ -227,25 +229,21 @@ export const animateTitle = mergeStyles(fieldwork, {
 
 })
 export const staticListItem1 = mergeStyles({
-    // position: 'fixed',
-    // fontSize: '25px',
-    // right: '500px',
-    // top: '15px',
     position: 'fixed',
     left: '',
     animationName: anchor1Animate,
-    animationDuration: '.5s',
+    // animationDuration: '10s',
     animationFillMode: 'forwards',
 })
 export const staticListItem2 = mergeStyles({
     animationName: anchor2Animate,
-    animationDuration: '.5s',
+    // animationDuration: '.5s',
     animationFillMode: 'forwards',
     
 })
 export const staticListItem3 = mergeStyles({
     animationName: anchor3Animate,
-    animationDuration: '.5s',
+    // animationDuration: '.5s',
     animationFillMode: 'forwards',
 })
 
