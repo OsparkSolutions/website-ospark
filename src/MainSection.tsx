@@ -4,12 +4,12 @@ import { Shell, useSpark } from 'spark_app_v2';
 import { useRef, useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { NavBarProps, ContactFormProps } from './App';
+import { distances } from './styles';
 
 export const fieldwork = mergeStyles({
     fontFamily: 'fieldwork, sans-serif',
 })
 //distances used to calc travel speed of nav bar anchor animations
-export const distances = {anchor1: 0, anchor2: 200, anchor3: 500}
 
 export const MainSection = (props: NavBarProps & ContactFormProps) => {
     const titleAnchorRef = useRef<HTMLAnchorElement>(null)
@@ -24,6 +24,33 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
     const anchor2Dist = useRef<number>()
     const anchor3Dist = useRef<number>()
 
+    const fixedBox = useRef<HTMLDivElement>(null)
+    const [sparkFixed, setSparkFixed] = useState(true)
+
+    
+    useEffect(() => {
+        if (titleAnchorRef.current && parentRef.current && fixedBox.current) {
+            if(sparkPosition.current){
+                // sparkPosition.current = {x: 0, y: 0}
+            }
+            //Runs after animation ends
+            titleAnchorRef.current.addEventListener('animationend', (event) => {
+                if (titleAnchorRef.current && parentRef.current && fixedBox.current) {
+                    const titleRect = titleAnchorRef.current.getBoundingClientRect()
+                    const box = parentRef.current.getBoundingClientRect()
+                    const fixedRect = fixedBox.current.getBoundingClientRect()
+                    if (sparkPosition.current) {
+                        // sparkPosition.current = { x: -fixedRect.width/2 + titleRect.left + 15, y: (box.height/2)-fixedRect.height/2}
+                    }
+                }
+            })
+        }
+        return () => {
+            titleAnchorRef.current?.removeEventListener('animationend', (event)=>{})
+
+        }
+    }, [])
+
     function getDistance(x1:number, y1:number, x2:number, y2:number){
         let y = x2 - x1;
         let x = y2 - y1;   
@@ -37,34 +64,64 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
             anchor1Dist.current = getDistance(anchorCords.x, anchorCords.y, window.innerWidth-distances.anchor1, 0)
             anchor2Dist.current = getDistance(anchorCords.x, anchorCords.y, window.innerWidth-distances.anchor2, 0)
             anchor3Dist.current = getDistance(anchorCords.x, anchorCords.y, window.innerWidth-distances.anchor3, 0)
-            console.log(anchor1Dist.current,anchor2Dist.current,anchor3Dist.current)
         }
     }, [])
-
+    
     const { ref: titleRef, inView: titleAnchorVisible} = useInView({
-       threshold: 1,
-       onChange: () =>{
-        if(titleAnchorRef.current){
-            
+        threshold: 1,
+        onChange: () => {
+            // setSparkFixed(!sparkFixed)
+            if (titleAnchorVisible && titleAnchorRef.current && parentRef.current && fixedBox.current) {
+                const titleRect = titleAnchorRef.current.getBoundingClientRect()
+                const box = parentRef.current.getBoundingClientRect()
+                const fixedRect = fixedBox.current.getBoundingClientRect()
+                console.log('i ran')
+                // sparkPosition.current = { x: (-box.width / 2)+24, y: (box.height/2)-25}
+                // sparkPosition.current = { x: 100, y: -100}
+
+                setSparkFixed(!sparkFixed)
+
+                // fixedBox.current.style.top = `${-fixedRect.height/2}`
+
+                console.log(JSON.stringify(sparkPosition.current))
+            }
+            console.log(titleAnchorVisible)
+            if (titleAnchorRef.current) {
+            }
+            if (titleAnchorRef.current && titleAnchorVisible === true) {
+                const titleRect = titleAnchorRef.current.getBoundingClientRect()
+                titleAnchorRef.current.style.position = 'fixed'
+                titleAnchorRef.current.style.top = `${titleRect.y}px`
+                titleAnchorRef.current.style.left = `${titleRect.x}px`
+                const range = titleAnchorRef.current.querySelector("#range") as HTMLSpanElement
+                const rangeWidth = range.getBoundingClientRect().width
+                range.style.width = `${rangeWidth}px`
+            }
+            else {
+                sparkPosition.current = undefined
+                if (titleAnchorRef.current && parentRef.current && titleAnchorVisible === false) {
+                    titleAnchorRef.current.style.top = ''
+                    titleAnchorRef.current.style.left = ''
+                    titleAnchorRef.current.style.position = ''
+                    titleAnchorRef.current.style.textShadow = ''
+                    titleAnchorRef.current.style.alignSelf = ''
+                }
+            }
         }
-        if(titleAnchorRef.current && titleAnchorVisible === true){
-            const titleRect = titleAnchorRef.current.getBoundingClientRect()
-            titleAnchorRef.current.style.position = 'fixed'
-            titleAnchorRef.current.style.top = `${titleRect.y}px`
-            titleAnchorRef.current.style.left = `${titleRect.x}px`
+    })
+    useEffect(()=>{
+        if(titleAnchorRef.current && parentRef.current && titleAnchorVisible === false){
+
+            const box = parentRef.current.getBoundingClientRect()
+            const titleBox = titleAnchorRef.current.getBoundingClientRect()
+            // sparkPosition.current = {x: -box.width/2, y: box.height}
+
         }
         else{
-            if(titleAnchorRef.current){
-                titleAnchorRef.current.style.top = ''
-                titleAnchorRef.current.style.left = ''
-                titleAnchorRef.current.style.position = ''
-                titleAnchorRef.current.style.textShadow = ''
-                titleAnchorRef.current.style.alignSelf = ''
-
-            } 
+            // sparkPosition.current = undefined
         }
-       }
-    })
+    },[titleAnchorVisible])
+
 
     const { ref: listItem1Ref, inView: listItem1Visible } = useInView({
         threshold: 1,
@@ -146,7 +203,9 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
     )
 
     const { Spark, sparkPosition } = useSpark({
-        parentElementRef: parentRef, defaults: {
+        titleAnchorVisible: titleAnchorVisible, 
+        parentElementRef: parentRef,
+        defaults: {
             numberOfLines: 500,
             pulseRate: 20,
             rotation: 2,
@@ -157,18 +216,11 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
         }, shells: myShells
     })
 
-    // useEffect(() => {
-    //     if (parentRef.current && titleRef.current) {
-    //         const titleRect = titleRef.current?.getBoundingClientRect()
-    //         const boundingRect = parentRef.current.getBoundingClientRect()
-    //         // mousePosition.current = {x: titleRect.left - boundingRect.left, y: titleRect.top-boundingRect.top-15}
-    //         // sparkPosition.current = {x: (boundingRect.width/2)-448, y: (boundingRect.height/2)-15}
-    //     }
-    // }, [])
+
 
     const handleMouseLeave = (event: any) => {
         if (sparkPosition.current) {
-            sparkPosition.current = undefined
+            // sparkPosition.current = undefined
         }
     }
 
@@ -176,13 +228,29 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
         if (parentRef.current) {
             const boundingRect = parentRef.current.getBoundingClientRect();
             const rect = event.currentTarget.getBoundingClientRect();
-            sparkPosition.current = { x: rect.left - (boundingRect.width / 2) - 110, y: (boundingRect.height / 2) + (boundingRect.top - rect.top) - 45 }
+            // sparkPosition.current = { x: rect.left - (boundingRect.width / 2) - 110, y: (boundingRect.height / 2) + (boundingRect.top - rect.top) - 45 }
         }
 
     }
-
+    console.log(sparkPosition.current)
     return (
-        <div>
+        <div id='this is the big one' ref={parentRef} style={{border: '1px solid red', borderStyle: 'solid'}}>
+
+            <div id="canvas" ref={fixedBox} style={{border: '1px solid red', borderStyle: 'solid'}} className={mergeStyles({
+                position: sparkFixed ? 'absolute' : 'fixed',
+                zIndex: '1000',
+                top: sparkFixed ? '' : `${-window.scrollY}px`,
+                // height: titleAnchorVisible ? '100%' : '50px',
+                
+                '& canvas':{
+                    backgroundColor: 'aqua',
+                    opacity: .3
+                } 
+            })}>
+                <Spark />
+
+            </div>
+
             <header className={props.item1Open ? styles.header : styles.headerClosed}>
                 <div className={styles.navBarContainer}>
                     {/* <a href='#' className={styles.logo}>Orange<span>Spark</span></a> */}
@@ -203,9 +271,8 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
                 </div>
             </header>
 
-            <div onMouseLeave={handleMouseLeave} id='main div' ref={parentRef} className={mergeStyles(styles.widthConstrained, props.navOpen ? styles.navOpenStyle : styles.widthConstrained)}>
-                <Spark />
-
+            <div onMouseLeave={handleMouseLeave} id='main div'  className={mergeStyles(styles.widthConstrained, props.navOpen ? styles.navOpenStyle : styles.widthConstrained)}>
+                {/* <Spark /> */}
                 <div className={mergeStyles(
                     styles.innerShadow,
                     {
@@ -223,15 +290,16 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
                             <a ref={titleAnchorRef} href='#' className={mergeStyles(titleAnchorVisible ? styles.logo : styles.animateTitle, {
                                 position: 'absolute',
                                 alignSelf: "center",
+                                
 
-                            })}>Orange<span>Spark</span> </a>
+                            })}>O<span id='range'>range</span><span id='spark'>Spark</span> </a>
                             <span  className={mergeStyles(fieldwork, {
                                 textDecoration: 'none',
                                 fontSize: 75,
                                 alignSelf: "center",
-                                visibility: 'hidden', 
+                                // visibility: 'hidden', 
                                 color: 'orange',
-                            })}>Orange<span>Spark</span></span>
+                            })}>Orange<span className='spark'>Spark</span></span>
 
                            
                         </div>
@@ -279,10 +347,10 @@ const AnchorItem = (props: AnchorItemProps) => {
     // }
     return (
     
-        <li ref={props.myItemRef} onMouseEnter={props.handleMouseMove} className={props.leftMargin ? mergeStyles({ marginLeft: '64px' }) : undefined}>
+        <li ref={props.myItemRef} onMouseEnter={props.handleMouseMove} className={props.leftMargin ? mergeStyles({ marginLeft: '64px', zIndex:'1005' }) : undefined}>
             <span style={{ position: 'relative' }}>
                 <a ref={props.anchorRef} className={props.itemOpen ? mergeStyles({animationDuration: `${props.animationTime()}s`}, props.itemStyleName) : styles.anchorItem}>{props.title}</a>
-                <span style={{ visibility: 'hidden', color: 'orange' }}>{props.title}</span>
+                <span style={{visibility:'hidden', color: 'orange' }}>{props.title}</span>
             </span>
         </li>
         

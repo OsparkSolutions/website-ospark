@@ -5,7 +5,8 @@ import { readBuilderProgram, transform } from 'typescript';
 import crack2 from './images/crack2.png'
 import crack from './images/crack.jpg'
 import waymark from './images/waymark.jpg'
-import { distances } from './MainSection';
+
+export const distances = {anchor1: 500, anchor2: 200, anchor3: 0}
 
 export const orange = mergeStyles({ color: '#f37322' })
 export const fieldwork = mergeStyles({
@@ -133,6 +134,7 @@ export const flipAnimateContainerInitial = mergeStyles("animate__animated animat
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
+    zIndex:'1005'
 })
 
 export const flipAnimateContainerAfter = mergeStyles({
@@ -142,6 +144,8 @@ export const flipAnimateContainerAfter = mergeStyles({
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
+    zIndex:'1005'
+
 })
 export const anotherSliderContainer = mergeStyles({
     width: '150px',
@@ -158,33 +162,39 @@ export const t = keyframes({
     '100%': {transform: 'scale(1.1)'}
 })
 
+const rangeSpanAnimation = keyframes({
+    '100%':{
+        transform: 'scaleX(0)',
+        width: 0
+    }, 
+})
+
 const titleAnimation = keyframes({
     '100%': {
         transform: 'scale(.5)',
         top: '-10px',
-        left: '-85px'
+        left: '-55px'
     }
 })
-
 const anchor1Animate = keyframes({
     '100%': {
         transform: 'scale(.7)',
         top:'5px',
-        right: '0px',
+        right: `${distances.anchor1}px`,
     }
 })
 const anchor2Animate = keyframes({
     '100%': {
         transform: 'scale(.7)',
         top:'5px',
-        right: '200px',
+        right: `${distances.anchor2}px`,
     }
 })
 const anchor3Animate = keyframes({
     '100%': {
         transform: 'scale(.7)',
         top:'5px',
-        right: '500px',
+        right: `${distances.anchor3}px`,
     }
 })
 export const anchorItem = mergeStyles({
@@ -192,7 +202,7 @@ export const anchorItem = mergeStyles({
     zindex: '99',
     height: '100%',
     width: '100%',
-    transition: 'top 4s, right 4s, transform 2s',
+    transition: 'top 2s, right 2s, transform 2s',
     ':hover' : {
         animationName: t,
         animationDuration: '1s',
@@ -200,18 +210,21 @@ export const anchorItem = mergeStyles({
         cursor: 'pointer',
         textDecoration: 'none'
     },
-    
 })
 
 export const logo = mergeStyles(fieldwork, {
+    border: '1px solid red',
+    borderStyle: 'solid',
     fontSize: 75,
     color: '#f37322',
     cursor: 'pointer',
     textDecoration: 'none',
     textShadow: "0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white",
-    'span': {
+    '& #spark': {
         fontSize: 75,
-        color: 'black'
+        color: 'black',
+        opacity: 1,
+        width: '100px',
     },
 });
 
@@ -222,10 +235,19 @@ export const animateTitle = mergeStyles(fieldwork, {
     textDecoration: 'none',
     animationName: titleAnimation,
     transition: 'top 1s, left 1s',
-
     animationDuration: '.5s',
     animationFillMode: 'forwards',
-    'span': { color: 'black' },
+    '& #spark': { 
+        color: 'black',
+    },
+    '& #range':{
+        // visibility: 'hidden',
+        transformOrigin: '0% 50%',
+        display: 'inline-block',
+        animationName: rangeSpanAnimation,
+        animationDuration: '.333s',
+        animationFillMode: 'forwards'
+    }
 
 })
 export const staticListItem1 = mergeStyles({
