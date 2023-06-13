@@ -27,6 +27,8 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
     const fixedBox = useRef<HTMLDivElement>(null)
     const [sparkFixed, setSparkFixed] = useState(true)
 
+    const [scrollY, setScrollY] = useState<number>(0)
+
     
     useEffect(() => {
         if (titleAnchorRef.current && parentRef.current && fixedBox.current) {
@@ -80,10 +82,15 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
                 // sparkPosition.current = { x: 100, y: -100}
 
                 setSparkFixed(!sparkFixed)
+                // setScrollY(-window.scrollY)
+                // setScrollY(-window.pageYOffset)
+                if(sparkFixed){
+                    sparkPosition.current = {x: (-box.width / 2)+24, y: 2}
+                }else{
+                    sparkPosition.current = undefined
 
-                // fixedBox.current.style.top = `${-fixedRect.height/2}`
+                }
 
-                console.log(JSON.stringify(sparkPosition.current))
             }
             console.log(titleAnchorVisible)
             if (titleAnchorRef.current) {
@@ -204,7 +211,7 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
 
     const { Spark, sparkPosition } = useSpark({
         titleAnchorVisible: titleAnchorVisible, 
-        parentElementRef: parentRef,
+        parentElementRef: fixedBox,
         defaults: {
             numberOfLines: 500,
             pulseRate: 20,
@@ -228,23 +235,30 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
         if (parentRef.current) {
             const boundingRect = parentRef.current.getBoundingClientRect();
             const rect = event.currentTarget.getBoundingClientRect();
-            // sparkPosition.current = { x: rect.left - (boundingRect.width / 2) - 110, y: (boundingRect.height / 2) + (boundingRect.top - rect.top) - 45 }
+            if(sparkFixed){
+                sparkPosition.current = { x: rect.left - (boundingRect.width / 2) - 110, y: (boundingRect.height / 2) + (boundingRect.top - rect.top) - 45 }
+            }else{
+                sparkPosition.current = undefined
+            }
         }
 
     }
-    console.log(sparkPosition.current)
     return (
-        <div id='this is the big one' ref={parentRef} style={{border: '1px solid red', borderStyle: 'solid'}}>
+        <div id='this is the big one' ref={parentRef} style={{ position: 'relative'}} className={mergeStyles({
+            
+        })}>
 
-            <div id="canvas" ref={fixedBox} style={{border: '1px solid red', borderStyle: 'solid'}} className={mergeStyles({
+            <div id="canvas" ref={fixedBox} style={{}} className={mergeStyles({
                 position: sparkFixed ? 'absolute' : 'fixed',
                 zIndex: '1000',
-                top: sparkFixed ? '' : `${-window.scrollY}px`,
+                top: sparkFixed ? '' : `0`,
+                height: sparkFixed ? '100%' : '50px',
+                width: '100%',
                 // height: titleAnchorVisible ? '100%' : '50px',
                 
                 '& canvas':{
-                    backgroundColor: 'aqua',
-                    opacity: .3
+                    // backgroundColor: 'aqua',
+                    // opacity: .3
                 } 
             })}>
                 <Spark />
@@ -297,7 +311,7 @@ export const MainSection = (props: NavBarProps & ContactFormProps) => {
                                 textDecoration: 'none',
                                 fontSize: 75,
                                 alignSelf: "center",
-                                // visibility: 'hidden', 
+                                visibility: 'hidden', 
                                 color: 'orange',
                             })}>Orange<span className='spark'>Spark</span></span>
 

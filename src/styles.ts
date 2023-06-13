@@ -108,7 +108,7 @@ export const mainSection = mergeStyles({
 export const parameterContainer = mergeStyles({
     padding: '20px',
     backgroundColor: '#DEDEDE',
-    borderStyle: 'solid',
+    // borderStyle: 'solid',
 })
 export const sliderContainer = mergeStyles({
     width: '100%',
@@ -149,7 +149,7 @@ export const flipAnimateContainerAfter = mergeStyles({
 })
 export const anotherSliderContainer = mergeStyles({
     width: '150px',
-    border: '2px solid black'
+    // border: '2px solid black'
 })
 export const slider = mergeStyles({
 
@@ -213,8 +213,8 @@ export const anchorItem = mergeStyles({
 })
 
 export const logo = mergeStyles(fieldwork, {
-    border: '1px solid red',
-    borderStyle: 'solid',
+    // border: '1px solid red',
+    // borderStyle: 'solid',
     fontSize: 75,
     color: '#f37322',
     cursor: 'pointer',
@@ -340,7 +340,7 @@ export const ourWorkHeaderBox = mergeStyles({
     margin: 'auto',
     textAlign: 'center',
     padding: '30px',
-    border: '10px solid #212121',
+    // border: '10px solid #212121',
     backgroundColor: 'rgb(0,0,0, 0.5)',
     'h1,p': {
         fontFamily: 'fieldwork'
@@ -427,21 +427,21 @@ export const labels = mergeStyles({
 export const nameInput = mergeStyles({
     width: '200px',
     justifyContent: 'center',
-    borderStyle: 'solid',
+    // borderStyle: 'solid',
     justifySelf: 'center',
     margin: 'auto',
 })
 export const emailInput = mergeStyles({
     width: '200px',
     justifyContent: 'center',
-    borderStyle: 'solid',
+    // borderStyle: 'solid',
     justifySelf: 'center',
     margin: 'auto',
 })
 export const dropDown = mergeStyles({
     width: '200px',
     justifyContent: 'center',
-    borderStyle: 'solid',
+    // borderStyle: 'solid',
     justifySelf: 'center',
     margin: 'auto',
     textAlign: 'center',
@@ -466,7 +466,7 @@ export const clear = mergeStyles({
 })
 export const buttonContainer = mergeStyles({
     margin: 'auto',
-    border: '1px solid white',
+    // border: '1px solid white',
 })
 export const contactButtonContainer = mergeStyles({
     width: '130px',
@@ -481,7 +481,7 @@ export const contactButton = mergeStyles({
     width: '130px',
     borderRadius: '40px',
     background: '#fff',
-    border: '2px solid orange',
+    // border: '2px solid orange',
     color: 'orange',
     letterSpacing: '1px',
     textShadow: '0',
